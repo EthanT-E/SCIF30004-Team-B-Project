@@ -1,6 +1,6 @@
 namespace C__Prcatice
 {
-    class Magnet
+    public class Magnet
     {
         private double chi;
         private Vector3D pos = new Vector3D();

@@ -1,6 +1,6 @@
 ﻿namespace C__Prcatice
 {
-    internal class Vector3D
+    public class Vector3D
     {
         private double[] xyz = [0, 0, 0];
 
