@@ -48,11 +48,11 @@ namespace C__Prcatice
 
         static void Main(string[] args)
         {
-            Vector3D auxField = new  Vector3D(1, 1, 1);
-            Vector3D magPosition = new Vector3D(0, 0, 0);
-            Magnet magnet = new Magnet(0.1,magPosition,auxField);
+            Vector3D auxField = new  Vector3D(1, 1, 1);//Change able value
+            Vector3D magPosition = new Vector3D(0, 0, 0);//Change able value
+            Magnet magnet = new Magnet(0.1,magPosition,auxField);//Change able value (First argument is Chi)
 
-            Vector3D arrorPosition = new Vector3D(1, 0, 0);
+            Vector3D arrorPosition = new Vector3D(1, 0, 0);//Change able value
 
             Console.WriteLine("B value "+BCalc(magnet, arrorPosition));
 
