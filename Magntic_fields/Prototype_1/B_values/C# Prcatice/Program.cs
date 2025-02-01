@@ -6,6 +6,20 @@ namespace C__Prcatice
     {
 
         static Vector3D BCalc(Magnet magnet, Vector3D arrowPosition)
+            /*
+            Description:
+                Caluculates the magnet field line vector at a given position of the arrow.
+
+            Parameters:
+                Magnet magnet:
+                    The magnet that is having its magnetic field line calculated.
+                Vector3D arrowPostion:
+                    Postion of space that the magnetic field line calculated for.
+                    In future this may be a Arriw object but for now it is a Vector3D (likely a parent class)
+            Returns:
+                Vector3D B:
+                    The magnetic field line vector from that magnet in the arrows postion in space.
+             */
         {
             Vector3D r = magnet.Pos - arrowPosition;
             Console.WriteLine("r is " +  r);
@@ -36,7 +50,7 @@ namespace C__Prcatice
         {
             Vector3D auxField = new  Vector3D(1, 1, 1);
             Vector3D magPosition = new Vector3D(0, 0, 0);
-            Magnet magnet = new(0.1,magPosition,auxField);
+            Magnet magnet = new Magnet(0.1,magPosition,auxField);
 
             Vector3D arrorPosition = new Vector3D(1, 0, 0);
 

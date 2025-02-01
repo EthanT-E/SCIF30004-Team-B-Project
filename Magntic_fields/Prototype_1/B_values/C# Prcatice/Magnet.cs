@@ -15,10 +15,22 @@ namespace C__Prcatice
 
         public Magnet(double iChi, Vector3D iPos, Vector3D iAux)
         {
+            /*
+            Description:
+                intializes magnet
+
+            Parameters:
+                double iChi:
+                    a value for the magnetic susceptibility of the magnet material
+                Vector3D iPos:
+                    Position of the manget in 3D space.
+                Vector3D iAux:
+                    Vector of the auxilary field.
+             */
             Aux = iAux;
             Chi = iChi;
             Pos = iPos;
-            Magnitization = iAux * iChi;
+            Magnitization = iAux * iChi;//Calculates the magnitization.
         }
 
     }
