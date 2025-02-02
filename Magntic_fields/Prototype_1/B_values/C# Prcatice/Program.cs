@@ -1,5 +1,7 @@
 ﻿
 
+using System.Numerics;
+
 namespace C__Prcatice
 {
     internal class Program
@@ -40,7 +42,12 @@ namespace C__Prcatice
             Console.WriteLine("Denominator "+denominator);
 
             Vector3D B = nominator/denominator;
-            B = B * 1e-7;//mu 0 = 4pi*1e-7 and in eq mu 0 /(4*pi) 
+            /*
+             mu0 = 4*PI*1e-7
+            equation has mu0/(4*PI)
+            Hence (4*PI*1e-7)/(4*PI) = 1e-7
+             */
+            B = B * 1e-7;
             
             return B;
         }
