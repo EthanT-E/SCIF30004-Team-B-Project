@@ -30,14 +30,13 @@ public class b_field : MonoBehaviour
 
     Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 point_pos)
     {
-        float vacuum_permeability = (float)1.25663706127e-6;
         Vector3.Dot(magnet_pos, point_pos);
         Vector3 dipole_moment = new Vector3(1, 2, 3);
         Vector3 vector_distance = new Vector3(point_pos.x - magnet_pos.x,
                                               point_pos.y - magnet_pos.y,
                                               point_pos.z - magnet_pos.z).normalized;
         float distance = Vector3.Distance(magnet.transform.position, point.transform.position);
-        return((vacuum_permeability / (4 * Mathf.PI)) * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
+        return((float)1e-7 * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
                                                                                             / Mathf.Pow(distance, 3));
     }
 }
