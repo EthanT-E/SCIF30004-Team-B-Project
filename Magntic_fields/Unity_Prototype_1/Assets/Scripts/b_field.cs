@@ -14,6 +14,8 @@ public class b_field : MonoBehaviour
         point_position = point.transform.position;
         Vector3 b_field = calculate_b_field(magnet_position, point_position);
         Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
+
+        point.transform.LookAt(b_field); // gets arrow to point in b direction
     }
 
     // Update is called once per frame
@@ -25,7 +27,10 @@ public class b_field : MonoBehaviour
             point_position = point.transform.position;
             Vector3 b_field = calculate_b_field(magnet_position, point_position);
             Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
+
+            point.transform.LookAt(b_field); // gets arrow to point in b direction
         }
+        
     }
 
     Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 point_pos)
