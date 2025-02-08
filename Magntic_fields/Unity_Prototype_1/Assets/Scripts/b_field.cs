@@ -15,7 +15,7 @@ public class b_field : MonoBehaviour
         Vector3 b_field = calculate_b_field(magnet_position, point_position);
         Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
 
-        point.transform.rotation = Quaternion.LookRotation(1000*b_field); // gets arrow to point in b direction
+        point.transform.rotation = Quaternion.LookRotation(1000*b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
 
     }
 
@@ -29,7 +29,7 @@ public class b_field : MonoBehaviour
             Vector3 b_field = calculate_b_field(magnet_position, point_position);
 
             Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
-            point.transform.rotation = Quaternion.LookRotation(1000*b_field);
+            point.transform.rotation = Quaternion.LookRotation(1000*b_field);// gets arrow to point in b direction. increase the coeffeient also increases the effective range
         }
               
     }
@@ -44,7 +44,5 @@ public class b_field : MonoBehaviour
         float distance = Vector3.Distance(magnet.transform.position, point.transform.position);
         return((float)1e-7 * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
                                                                                             / Mathf.Pow(distance, 3));
-        //return((3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
-         //                                                                                   / Mathf.Pow(distance, 3));
     }
 }
