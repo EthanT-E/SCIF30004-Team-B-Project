@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 284477315}
   - component: {fileID: 284477316}
   m_Layer: 0
-  m_Name: Code
+  m_Name: System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,8 +166,9 @@ MonoBehaviour:
   magnet: {fileID: 1400607285}
   arrowPrefab: {fileID: 919132149155446097, guid: 7da61a198c2462746900040a753cdb5f, type: 3}
   Arrows: []
-  field_size: {x: 1, y: 1, z: 1}
-  arrow_gap: 0.5
+  field_size: {x: 3, y: 3, z: 3}
+  arrow_gap: 1
+  b_factor: 1000
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
