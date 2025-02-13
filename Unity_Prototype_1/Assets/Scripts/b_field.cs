@@ -11,6 +11,7 @@ public class b_field : MonoBehaviour
     public Vector3 field_size = new Vector3(2,2,2);
     public float arrow_gap = 0.5f;
     public float b_factor = 1000;
+    public float radius_of_influence = 2.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,11 +20,18 @@ public class b_field : MonoBehaviour
         magnet_position = magnet.transform.position; //gets magnet position
         for (int i=0; i<Arrows.Count;i++) //iterates through all arrows //equal to line 37-44
         {
-            Arrows[i].SetActive(true);
             arrow_position = Arrows[i].transform.position;
-            Vector3 b_field = calculate_b_field(magnet_position, arrow_position,Arrows[i]);
-            Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
-            Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor*b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+            float distance = Vector3.Distance(arrow_position, magnet_position);
+            if (distance < radius_of_influence)
+            {
+                Vector3 b_field = calculate_b_field(magnet_position, arrow_position, Arrows[i], distance);
+                Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+                Arrows[i].SetActive(true);
+            }
+            else
+            {
+                Arrows[i].SetActive(false);
+            }
         }
     }
 
@@ -36,23 +44,29 @@ public class b_field : MonoBehaviour
             magnet_position = new_magnet_position;
             for (int i=0; i<Arrows.Count;i++)
             {
-            Arrows[i].SetActive(true);
-            arrow_position = Arrows[i].transform.position;
-            Vector3 b_field = calculate_b_field(magnet_position, arrow_position,Arrows[i]);
-            Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
-            Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor*b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
+                arrow_position = Arrows[i].transform.position;
+                float distance = Vector3.Distance(arrow_position, magnet_position);
+                if (distance < radius_of_influence)
+                {
+                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position, Arrows[i], distance);
+                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
+                    Arrows[i].SetActive(true);
+                }
+                else
+                {
+                    Arrows[i].SetActive(false);
+                }
             } 
         }
     }
 
-    Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 arrow_pos, GameObject arrow)
+    Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 arrow_pos, GameObject arrow, float distance)
     {
         Vector3.Dot(magnet_pos, arrow_pos);
         Vector3 dipole_moment = new Vector3(1, 2, 3);
         Vector3 vector_distance = new Vector3(arrow_pos.x - magnet_pos.x,
                                               arrow_pos.y - magnet_pos.y,
                                               arrow_pos.z - magnet_pos.z).normalized;
-        float distance = Vector3.Distance(magnet.transform.position, arrow.transform.position);
         return( (float)1e-7*(3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
                                                                                             / Mathf.Pow(distance, 3));
     }
