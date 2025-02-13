@@ -19,7 +19,6 @@ public class b_field : MonoBehaviour
         magnet_position = magnet.transform.position; //gets magnet position
         for (int i=0; i<Arrows.Count;i++) //iterates through all arrows //equal to line 37-44
         {
-            Arrows[i].SetActive(true);
             arrow_position = Arrows[i].transform.position;
             Vector3 b_field = calculate_b_field(magnet_position, arrow_position,Arrows[i]);
             Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
@@ -36,11 +35,10 @@ public class b_field : MonoBehaviour
             magnet_position = new_magnet_position;
             for (int i=0; i<Arrows.Count;i++)
             {
-            Arrows[i].SetActive(true);
             arrow_position = Arrows[i].transform.position;
             Vector3 b_field = calculate_b_field(magnet_position, arrow_position,Arrows[i]);
             Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
-            Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor*b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
+            Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor*b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
             } 
         }
     }
