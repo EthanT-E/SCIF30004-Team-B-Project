@@ -44,6 +44,7 @@ public class b_field : MonoBehaviour
             magnet_position = new_magnet_position;
             for (int i=0; i<Arrows.Count;i++)
             {
+
                 arrow_position = Arrows[i].transform.position;
                 float distance = Vector3.Distance(arrow_position, magnet_position);
                 if (distance < radius_of_influence)
