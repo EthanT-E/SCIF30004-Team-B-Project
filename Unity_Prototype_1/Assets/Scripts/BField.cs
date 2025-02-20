@@ -4,32 +4,41 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEditor.Events;
 
-public class b_field : MonoBehaviour
+public class BField : MonoBehaviour
 {
     public GameObject magnet;
     Vector3 magnet_position;
     Vector3 arrow_position;
     public GameObject arrowPrefab;
+    public float colorscale;
+    public float min_radius_of_influence;
     public List<GameObject> Arrows = new List<GameObject>();
     public Vector3 field_size = new Vector3(2,2,2);
     public float arrow_gap = 0.5f;
     public float b_factor = 1000;
     public float radius_of_influence = 2.0f;
+    public float max_B_field_value = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
         magnet_position = magnet.transform.position; //gets magnet position
+        min_radius_of_influence = arrow_gap/2;
         for (int i=0; i<Arrows.Count;i++) //iterates through all arrows //equal to line 37-44
         {
             arrow_position = Arrows[i].transform.position;
             float distance = Vector3.Distance(arrow_position, magnet_position);
-            if (distance < radius_of_influence)
+            if (distance < radius_of_influence && distance > min_radius_of_influence)
             {
                 Vector3 b_field = calculate_b_field(magnet_position, arrow_position, distance);
                 Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
+                if(b_field.magnitude>max_B_field_value)
+                {
+                    max_B_field_value = b_field.magnitude;
+                    print(max_B_field_value);
+                }
             }
             else
             {
@@ -50,11 +59,18 @@ public class b_field : MonoBehaviour
 
                 arrow_position = Arrows[i].transform.position;
                 float distance = Vector3.Distance(arrow_position, magnet_position);
-                if (distance < radius_of_influence)
+                if (distance < radius_of_influence && distance > min_radius_of_influence)
                 {
                     Vector3 b_field = calculate_b_field(magnet_position, arrow_position, distance);
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
+                    colorscale = 60*(b_field.magnitude/max_B_field_value);
+                    if(colorscale>1){
+                        colorscale = 1f;
+                    }
+                    
+                    print(colorscale);//debug
+                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1,1-colorscale,0,colorscale);
                 }
                 else
                 {
