@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEditor.Events;
+using System.Linq;
 
 public class BField : MonoBehaviour
 {
-    public GameObject magnet;
+    public GameObject magnetPrefab;
     Vector3 magnet_position;
     Vector3 arrow_position;
     public GameObject arrowPrefab;
@@ -18,31 +19,47 @@ public class BField : MonoBehaviour
     public float b_factor = 1000;
     public float radius_of_influence = 2.0f;
     public float max_B_field_value = 0f;
-
+    public List<GameObject> Magnets = new List<GameObject>();
+    public List<Vector3> newMagPositions = new List<Vector3>();
+    public List<Vector3> oldMagPositions = new List<Vector3>();
+    public int mag_num;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
-        magnet_position = magnet.transform.position; //gets magnet position
+        generate_magnet(magnetPrefab,Magnets);
+        mag_num = Magnets.Count;
         min_radius_of_influence = arrow_gap/2;
         for (int i=0; i<Arrows.Count;i++) //iterates through all arrows //equal to line 37-44
         {
+            Vector3 total_b_field = Vector3.zero;
             arrow_position = Arrows[i].transform.position;
-            float distance = Vector3.Distance(arrow_position, magnet_position);
-            if (distance < radius_of_influence && distance > min_radius_of_influence)
+            Arrows[i].SetActive(false);
+            for(int j=0; j<Magnets.Count;j++)
             {
-                Vector3 b_field = calculate_b_field(magnet_position, arrow_position, distance);
-                Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
-                Arrows[i].SetActive(true);
-                if(b_field.magnitude>max_B_field_value)
+                magnet_position = Magnets[j].transform.position;
+                oldMagPositions.Add(magnet_position);
+                float distance = Vector3.Distance(arrow_position, magnet_position);
+                if (distance < radius_of_influence && distance > min_radius_of_influence)
                 {
-                    max_B_field_value = b_field.magnitude;
-                    print(max_B_field_value);
+                    Arrows[i].SetActive(true);
                 }
             }
-            else
+            if(Arrows[i].activeSelf==true)
             {
-                Arrows[i].SetActive(false);
+                for(int j=0; j<Magnets.Count;j++)
+                {
+                    magnet_position = Magnets[j].transform.position;
+                    float distance = Vector3.Distance(arrow_position, magnet_position);
+                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position, distance);
+                    total_b_field += b_field;
+                }
+            }
+            Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * total_b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+            if(total_b_field.magnitude>max_B_field_value)
+            {
+                max_B_field_value = total_b_field.magnitude;
+                print(max_B_field_value);
             }
         }
     }
@@ -50,34 +67,55 @@ public class BField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 new_magnet_position = magnet.transform.position;
-        if(magnet_position != new_magnet_position)
+        newMagPositions.Clear();
+        for (int j=0; j<Magnets.Count;j++)
         {
-            magnet_position = new_magnet_position;
-            for (int i=0; i<Arrows.Count;i++)
-            {
-
-                arrow_position = Arrows[i].transform.position;
-                float distance = Vector3.Distance(arrow_position, magnet_position);
-                if (distance < radius_of_influence && distance > min_radius_of_influence)
-                {
-                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position, distance);
-                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
-                    Arrows[i].SetActive(true);
-                    colorscale = 60*(b_field.magnitude/max_B_field_value);
-                    if(colorscale>1){
-                        colorscale = 1f;
-                    }
-                    
-                    print(colorscale);//debug
-                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1,1-colorscale,0,colorscale);
-                }
-                else
-                {
-                    Arrows[i].SetActive(false);
-                }
-            } 
+            newMagPositions.Add(Magnets[j].transform.position);
         }
+        //if((oldMagPositions.SequenceEqual(newMagPositions)==false) ||(Magnets.Count!=mag_num))
+        //{
+            mag_num = Magnets.Count;
+            oldMagPositions = newMagPositions;
+            for (int i=0; i<Arrows.Count;i++) //iterates through all arrows //equal to line 37-44
+            {
+                Vector3 total_b_field = Vector3.zero;
+                arrow_position = Arrows[i].transform.position;
+                Arrows[i].SetActive(false);
+                for(int j=0; j<Magnets.Count;j++)
+                {
+                    magnet_position = newMagPositions[j];
+                    oldMagPositions.Add(magnet_position);
+                    float distance = Vector3.Distance(arrow_position, magnet_position);
+                    if (distance < radius_of_influence && distance > min_radius_of_influence)
+                    {
+                        Arrows[i].SetActive(true);
+                    }
+                }
+                if(Arrows[i].activeSelf==true)
+                {
+                    for(int j=0; j<Magnets.Count;j++)
+                    {
+                        magnet_position = newMagPositions[j];
+                        float distance = Vector3.Distance(arrow_position, magnet_position);
+                        Vector3 b_field = calculate_b_field(magnet_position, arrow_position, distance);
+                        total_b_field += b_field;
+                    }
+                }
+                Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * total_b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+                colorscale = 60*(total_b_field.magnitude/max_B_field_value);
+                if(colorscale>1)
+                {
+                    colorscale = 1f;
+                }  
+                print(colorscale);//debug
+                Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1,1-colorscale,0,colorscale);
+                if(total_b_field.magnitude>max_B_field_value)
+                {
+                    max_B_field_value = total_b_field.magnitude;
+                    print(max_B_field_value);
+                }
+            }
+        //}
     }
 
     Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 arrow_pos, float distance)
@@ -104,21 +142,29 @@ public class BField : MonoBehaviour
                     arrow.transform.position = new Vector3(x, y, z); //gives arrow coordinates corresponding to grid point
 
                     //Allow left controller to interact with arrow
-                    BoxCollider arrowCollider = arrow.AddComponent(typeof(BoxCollider)) as BoxCollider;
-                    arrowCollider.excludeLayers = ~0; //Exclude Layers: Everything - will not have any physics interactions
-                    XRSimpleInteractable scanInteractor = arrow.AddComponent(typeof(XRSimpleInteractable)) as XRSimpleInteractable;
-                    scanInteractor.interactionLayers = InteractionLayerMask.GetMask("Scannables");
-                    UnityEventTools.AddPersistentListener(scanInteractor.selectEntered, scan);
+                    //BoxCollider arrowCollider = arrow.AddComponent(typeof(BoxCollider)) as BoxCollider;
+                    //arrowCollider.excludeLayers = ~0; //Exclude Layers: Everything - will not have any physics interactions
+                    //XRSimpleInteractable scanInteractor = arrow.AddComponent(typeof(XRSimpleInteractable)) as XRSimpleInteractable;
+                    //scanInteractor.interactionLayers = InteractionLayerMask.GetMask("Scannables");
+                    //UnityEventTools.AddPersistentListener(scanInteractor.selectEntered, scan);
 
                     Arrows.Add(arrow); //Adds arrow to list of arrows
                 }
             }
         }
     }
-    void scan(SelectEnterEventArgs args)
+
+    void generate_magnet(GameObject magnetPrefab, List<GameObject> Magnets)
     {
-        Vector3 b_field = calculate_b_field(magnet.transform.position, args.interactableObject.transform.position, 
-                                            Vector3.Distance(magnet.transform.position, args.interactableObject.transform.position));
-        Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
+        GameObject magnet = Instantiate(magnetPrefab);
+        magnet.transform.position = Vector3.zero;
+        Magnets.Add(magnet);
     }
+
+    // void scan(SelectEnterEventArgs args)
+    // {
+    //     Vector3 b_field = calculate_b_field(magnet.transform.position, args.interactableObject.transform.position, 
+    //                                         Vector3.Distance(magnet.transform.position, args.interactableObject.transform.position));
+    //     Debug.Log(b_field.x + ", " + b_field.y + ", " + b_field.z);
+    // }
 }
