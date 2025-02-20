@@ -61,12 +61,12 @@ public class BField : MonoBehaviour
                     Vector3 b_field = calculate_b_field(magnet_position, arrow_position, Arrows[i], distance);
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
-                    colorscale = 60/(b_field.magnitude/max_B_field_value)*(b_field.magnitude/max_B_field_value)*(b_field.magnitude/max_B_field_value);
+                    colorscale = 60*(b_field.magnitude/max_B_field_value);
                     if(colorscale>1){
                         colorscale = 1f;
                     }
                     
-                    print(colorscale);
+                    print(colorscale);//debug
                     Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1,1-colorscale,0,colorscale);
                 }
                 else
