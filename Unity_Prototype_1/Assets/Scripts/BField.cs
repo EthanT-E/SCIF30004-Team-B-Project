@@ -25,19 +25,18 @@ public class BField : MonoBehaviour
     void Start()
     {
         generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
-        magnet_position = magnet.transform.position; //gets magnet position
-        Vector3 resultant_b_field = new Vector3(0, 0, 0);
-        magnets.Add(magnet);
+        Vector3 resultant_b_field = Vector3.zero;
+        magnets.Add (magnet);
         magnets_amount = magnets.Count;
         old_positions.Add(magnet.transform.position);
         for (int i = 0; i < Arrows.Count; i++) //iterates through all arrows //equal to line 37-44
         {
             Arrows[i].SetActive(true);
             arrow_position = Arrows[i].transform.position;
-            foreach (var magnet in magnets)
+            for (int j = 0; j < magnets.Count; j++)
                 {
-                    magnet_position = magnet.transform.position;
-                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position, Arrows[i]);
+                    magnet_position = magnets[j].transform.position;
+                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position);
                     resultant_b_field += b_field;
                 }
             Debug.Log(resultant_b_field.x + ", " + resultant_b_field.y + ", " + resultant_b_field.z);
@@ -49,7 +48,7 @@ public class BField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(magnets.Count);
+        
         new_positions.Clear();
         for (int i = 0; i < magnets.Count; i++)
         {
@@ -60,19 +59,21 @@ public class BField : MonoBehaviour
         {
             Debug.Log(old_positions.Equals(new_positions));
             magnets_amount = magnets.Count;
-            old_positions = new List<Vector3>(new_positions);
+            old_positions = new_positions;
             for (int i = 0; i < Arrows.Count; i++)
             {
-                resultant_b_field = new Vector3(0, 0, 0);
-                Arrows[i].SetActive(true);
+                resultant_b_field = Vector3.zero;
                 arrow_position = Arrows[i].transform.position;
-                foreach (var magnet in magnets)
+                for (int j = 0; j < magnets.Count; j++)
                 {
-                    magnet_position = magnet.transform.position;
-                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position, Arrows[i]);
+                    Debug.Log(magnets[j]);
+                    magnet_position = magnets[j].transform.position;
+                    Vector3 b_field = calculate_b_field(magnet_position, arrow_position);
                     resultant_b_field += b_field;
+                    Debug.Log($"Magnet {j} -> Arrow {i}: B-Field = {resultant_b_field.x + ", " + resultant_b_field.y + ", " + resultant_b_field.z}");
+                    
                 }
-                //Debug.Log("Resultant Field from Update: " + resultant_b_field.x + ", " + resultant_b_field.y + ", " + resultant_b_field.z);
+                //Debug.Log("Arrow " + i +" " + resultant_b_field.x + ", " + resultant_b_field.y + ", " + resultant_b_field.z);
                 Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * resultant_b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
             }
         }
@@ -80,14 +81,14 @@ public class BField : MonoBehaviour
 
     }
 
-    Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 arrow_pos, GameObject arrow)
+    Vector3 calculate_b_field(Vector3 magnet_pos, Vector3 arrow_pos)
     {
         Vector3.Dot(magnet_pos, arrow_pos);
         Vector3 dipole_moment = new Vector3(1, 2, 3);
         Vector3 vector_distance = new Vector3(arrow_pos.x - magnet_pos.x,
                                               arrow_pos.y - magnet_pos.y,
                                               arrow_pos.z - magnet_pos.z).normalized;
-        float distance = Vector3.Distance(magnet.transform.position, arrow.transform.position);
+        float distance = Vector3.Distance(magnet_pos, arrow_pos);
         return ((float)1e-7 * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
                                                                                             / Mathf.Pow(distance, 3));
     }
