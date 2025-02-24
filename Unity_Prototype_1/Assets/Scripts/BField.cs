@@ -11,11 +11,12 @@ public class BField : MonoBehaviour
     public GameObject arrowPrefab;
     public float min_radius_of_influence;
     public List<GameObject> Arrows = new List<GameObject>();
-    public Vector3 field_size = new Vector3(2,2,2);
-    public float arrow_gap = 0.5f;
-    public float b_factor = 1000;
-    public float radius_of_influence = 2.0f;
+    public Vector3 field_size = new Vector3(3,3,2);
+    public float arrow_gap = 0.15f;
+    public float b_factor = 4;
+    public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
+    public Vector3 dipole_moment = new Vector3(1, 5, 1);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -100,7 +101,6 @@ public class BField : MonoBehaviour
     Vector3 calculate_b_field(Vector3 arrow_pos)
     {
         Vector3 resultant_b_field = Vector3.zero;
-        Vector3 dipole_moment = new Vector3(1, 2, 3);
         for (int i = 0; i < magnet_positions.Count; i++)
         {
             Vector3 vector_distance = new Vector3(arrow_pos.x - magnet_positions[i].x,
@@ -115,12 +115,12 @@ public class BField : MonoBehaviour
     void generate_magnets()
     {
         GameObject magnet = Instantiate(magnetPrefab);
-        magnet.transform.position = Vector3.zero;
+        magnet.transform.position = new Vector3(-2,2,0);
         Magnets.Add(magnet);
         magnet_positions.Add(magnet.transform.position);
 
         GameObject magnet2 = Instantiate(magnetPrefab);
-        magnet2.transform.position = new Vector3(1,0,1);
+        magnet2.transform.position = new Vector3(-2,2,0);
         Magnets.Add(magnet2);
         magnet_positions.Add(magnet2.transform.position);
     }
