@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875fb8d9dd054734882e4fe7bc366e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magnetPrefab: {fileID: 4076686205774434416, guid: 70d842942097137498726f47ffcfae1f, type: 3}
+  magnetPrefab: {fileID: 8798230830766133253, guid: 82c435fba413841468d2475f2b7d6ca0, type: 3}
   Magnets: []
   arrowPrefab: {fileID: 6474583027956322311, guid: 7196c378f90a818449dc9d1f7eb771f3, type: 3}
   min_radius_of_influence: 0
