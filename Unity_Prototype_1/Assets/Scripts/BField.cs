@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit;
+using Assets.Scripts;
 
 public class BField : MonoBehaviour
 {
@@ -115,14 +116,11 @@ public class BField : MonoBehaviour
     void generate_magnets()
     {
         GameObject magnet = Instantiate(magnetPrefab);
-        magnet.transform.position = new Vector3(-2,2,0);
-        Magnets.Add(magnet);
-        magnet_positions.Add(magnet.transform.position);
+        Magnet_class mag = new Magnet_class(magnet,Magnets,magnet_positions,new Vector3(-1.5f,1,0));
+        mag.set_suscept(2f);
 
         GameObject magnet2 = Instantiate(magnetPrefab);
-        magnet2.transform.position = new Vector3(-2,2,0);
-        Magnets.Add(magnet2);
-        magnet_positions.Add(magnet2.transform.position);
+        Magnet_class mag2 = new Magnet_class(magnet, Magnets, magnet_positions,new Vector3(-2.5f,2,0));
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)
