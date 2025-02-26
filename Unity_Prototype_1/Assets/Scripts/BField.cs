@@ -120,7 +120,8 @@ public class BField : MonoBehaviour
         mag.set_suscept(2f);
 
         GameObject magnet2 = Instantiate(magnetPrefab);
-        Magnet_class mag2 = new Magnet_class(magnet, Magnets, magnet_positions,new Vector3(-2.5f,2,0));
+        Magnet_class mag2 = new Magnet_class(magnet2, Magnets, magnet_positions,new Vector3(-2.5f,2,0));
+        mag2.set_auxiliary(new Vector3(2, 10, 2));
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)
