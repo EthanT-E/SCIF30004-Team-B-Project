@@ -1,0 +1,39 @@
+{
+  "buildFiles": [
+    "C:\\Users\\Nate\\Documents\\SCIF30004_pulls\\SCIF30004-Team-B-Project\\Unity_Prototype_1\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\src\\main\\cpp\\CMakeLists.txt",
+    "C:\\Users\\Nate\\Documents\\SCIF30004_pulls\\SCIF30004-Team-B-Project\\Unity_Prototype_1\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\src\\main\\cpp\\GameActivity\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.36f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\Nate\\Documents\\SCIF30004_pulls\\SCIF30004-Team-B-Project\\Unity_Prototype_1\\.utmp\\RelWithDebInfo\\24682h4z\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.36f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\Nate\\Documents\\SCIF30004_pulls\\SCIF30004-Team-B-Project\\Unity_Prototype_1\\.utmp\\RelWithDebInfo\\24682h4z\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "game::@d02bb112ea9f9c2ed29f": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "game",
+      "output": "C:\\Users\\Nate\\Documents\\SCIF30004_pulls\\SCIF30004-Team-B-Project\\Unity_Prototype_1\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\build\\intermediates\\cxx\\RelWithDebInfo\\24682h4z\\obj\\arm64-v8a\\libgame.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.36f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.36f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
