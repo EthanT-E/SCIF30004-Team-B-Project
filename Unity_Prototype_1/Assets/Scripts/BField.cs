@@ -32,7 +32,7 @@ public class BField : MonoBehaviour
             bool active = false;
             for (int j = 0; j < magnets.Count; j++)
             {
-                float distance = Vector3.Distance(magnets[i].MagnetPosition, arrow_position);
+                float distance = Vector3.Distance(magnets[j].MagnetPosition, arrow_position);
                 if (distance < radius_of_influence && distance > min_radius_of_influence)
                 {
                     active = true;
@@ -42,17 +42,23 @@ public class BField : MonoBehaviour
             if (active)
             {
                 Vector3 b_field = calculate_b_field(arrow_position);
+
                 Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
-                if(b_field.magnitude>max_B_field_value)
+                if (b_field.magnitude > max_B_field_value)
+                {
                     max_B_field_value = b_field.magnitude;
+                }
             }
             else
             {
                 Arrows[i].SetActive(false);
             }
         }
+        
     }
+
+   
 
     // Update is called once per frame
     void Update()
@@ -80,12 +86,15 @@ public class BField : MonoBehaviour
                         active = true;
                         break;
                     }
+
+
                 }
                 if (active)
                 {
                     Vector3 b_field = calculate_b_field(arrow_position);
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
+
                     float colorscale = 60*(b_field.magnitude/max_B_field_value);
                     if(colorscale>1){
                         colorscale = 1f;
@@ -108,10 +117,13 @@ public class BField : MonoBehaviour
             Vector3 vector_distance = new Vector3(arrow_pos.x - magnets[i].MagnetPosition.x,
                                                   arrow_pos.y - magnets[i].MagnetPosition.y,
                                                   arrow_pos.z - magnets[i].MagnetPosition.z).normalized;
-            resultant_b_field += 1e-7f * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
+            resultant_b_field += 1e-7f * (3 * (Vector3.Dot(magnets[i].dipole_moment, vector_distance)) * vector_distance - magnets[i].dipole_moment)
                                             / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, arrow_pos), 3);
+            
         }
+
         return resultant_b_field;
+
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)

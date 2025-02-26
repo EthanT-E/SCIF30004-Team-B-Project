@@ -12,7 +12,8 @@ namespace Assets.Scripts
         
         public Vector3 MagnetPosition;
         public float magnetic_susceptibility;
-        public Vector3 auxilary_field, dipole_moment;
+        public Vector3 auxilary_field;
+        public Vector3 dipole_moment;
 
         public Magnet_class(GameObject prefab, Vector3 start_pos, Vector3 iAux, float iSus = 1)
         {
@@ -21,6 +22,8 @@ namespace Assets.Scripts
             magnetic_susceptibility = iSus;
 
             auxilary_field = iAux;
+
+            Dipole_moment();
 
         }
 
