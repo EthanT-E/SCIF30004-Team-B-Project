@@ -7,8 +7,7 @@ using Assets.Scripts;
 public class BField : MonoBehaviour
 {
     public GameObject magnetPrefab;
-    public List<GameObject> Magnets = new List<GameObject>();
-    List<Vector3> magnet_positions = new List<Vector3>();
+    public List<Magnet_class> magnets = new List<Magnet_class>();
     public GameObject arrowPrefab;
     public float min_radius_of_influence;
     public List<GameObject> Arrows = new List<GameObject>();
@@ -29,9 +28,9 @@ public class BField : MonoBehaviour
         {
             Vector3 arrow_position = Arrows[i].transform.position;
             bool active = false;
-            for (int j = 0; j < magnet_positions.Count; j++)
+            for (int j = 0; j < magnets.Count; j++)
             {
-                float distance = Vector3.Distance(magnet_positions[j], arrow_position);
+                float distance = Vector3.Distance(magnets[i].MagnetPosition, arrow_position);
                 if (distance < radius_of_influence && distance > min_radius_of_influence)
                 {
                     active = true;
@@ -57,12 +56,12 @@ public class BField : MonoBehaviour
     void Update()
     {
         bool has_moved = false;
-        for (int i = 0; i < Magnets.Count; i++)
+        for (int i = 0; i < magnets.Count; i++)
         {
-            if (magnet_positions[i] != Magnets[i].transform.position)
+            if (magnets[i].MagnetPosition != magnets[i].Magnet.transform.position)
             {
                 has_moved = true;
-                magnet_positions[i] = Magnets[i].transform.position;
+                magnets[i].new_pos();
             }
         }
         if(has_moved)
@@ -71,9 +70,9 @@ public class BField : MonoBehaviour
             {
                 Vector3 arrow_position = Arrows[i].transform.position;
                 bool active = false;
-                for (int j = 0; j < magnet_positions.Count; j++)
+                for (int j = 0; j < magnets.Count; j++)
                 {
-                    float distance = Vector3.Distance(magnet_positions[j], arrow_position);
+                    float distance = Vector3.Distance(magnets[j].MagnetPosition, arrow_position);
                     if (distance < radius_of_influence && distance > min_radius_of_influence)
                     {
                         active = true;
@@ -102,13 +101,13 @@ public class BField : MonoBehaviour
     Vector3 calculate_b_field(Vector3 arrow_pos)
     {
         Vector3 resultant_b_field = Vector3.zero;
-        for (int i = 0; i < magnet_positions.Count; i++)
+        for (int i = 0; i < magnets.Count; i++)
         {
-            Vector3 vector_distance = new Vector3(arrow_pos.x - magnet_positions[i].x,
-                                                  arrow_pos.y - magnet_positions[i].y,
-                                                  arrow_pos.z - magnet_positions[i].z).normalized;
+            Vector3 vector_distance = new Vector3(arrow_pos.x - magnets[i].MagnetPosition.x,
+                                                  arrow_pos.y - magnets[i].MagnetPosition.y,
+                                                  arrow_pos.z - magnets[i].MagnetPosition.z).normalized;
             resultant_b_field += 1e-7f * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
-                                            / Mathf.Pow(Vector3.Distance(magnet_positions[i], arrow_pos), 3);
+                                            / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, arrow_pos), 3);
         }
         return resultant_b_field;
     }
@@ -116,12 +115,14 @@ public class BField : MonoBehaviour
     void generate_magnets()
     {
         GameObject magnet = Instantiate(magnetPrefab);
-        Magnet_class mag = new Magnet_class(magnet,Magnets,magnet_positions,new Vector3(-1.5f,1,0));
+        Magnet_class mag = new Magnet_class(magnet,new Vector3(-1.5f,1,0));
         mag.set_suscept(2f);
+        magnets.Add(mag);
 
         GameObject magnet2 = Instantiate(magnetPrefab);
-        Magnet_class mag2 = new Magnet_class(magnet2, Magnets, magnet_positions,new Vector3(-2.5f,2,0));
+        Magnet_class mag2 = new Magnet_class(magnet2,new Vector3(-2.5f,1,0));
         mag2.set_auxiliary(new Vector3(2, 10, 2));
+        magnets.Add(mag2);
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)
