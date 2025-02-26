@@ -21,7 +21,9 @@ public class BField : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        generate_magnets(); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab,magnets,new Vector3(-2,1,0)); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0),new Vector3(2,10,2),2);
+
         generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap/2;
         for (int i=0; i<Arrows.Count;i++) //iterates through all arrows
@@ -110,19 +112,6 @@ public class BField : MonoBehaviour
                                             / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, arrow_pos), 3);
         }
         return resultant_b_field;
-    }
-
-    void generate_magnets()
-    {
-        GameObject magnet = Instantiate(magnetPrefab);
-        Magnet_class mag = new Magnet_class(magnet,new Vector3(-1.5f,1,0));
-        mag.set_suscept(2f);
-        magnets.Add(mag);
-
-        GameObject magnet2 = Instantiate(magnetPrefab);
-        Magnet_class mag2 = new Magnet_class(magnet2,new Vector3(-2.5f,1,0));
-        mag2.set_auxiliary(new Vector3(2, 10, 2));
-        magnets.Add(mag2);
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)
