@@ -5,29 +5,26 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Assets.Scripts
 {
+
     public class Magnet_class : MonoBehaviour
     {
         public GameObject Magnet;
+        
         public Vector3 MagnetPosition;
         public float magnetic_susceptibility;
-        public Vector3 auxilary_field, dipole_moment;
+        public Vector3 auxilary_field;
+        public Vector3 dipole_moment;
 
-        public Magnet_class(GameObject iMagnet, List<GameObject> mag_list, List<Vector3> mag_pos,Vector3 start_pos)
+        public Magnet_class(GameObject prefab, Vector3 start_pos, Vector3 iAux, float iSus = 1)
         {
-            Magnet = iMagnet;
+            Magnet = Instantiate(prefab);
             Magnet.transform.position = start_pos;
-            mag_list.Add(Magnet);
-            mag_pos.Add(Magnet.transform.position);
-            magnetic_susceptibility = 1;
-            auxilary_field = new Vector3(1, 5, 1);
-        }
+            magnetic_susceptibility = iSus;
 
-        public Magnet_class(GameObject iMagnet, Vector3 start_pos)
-        {
-            Magnet = iMagnet;
-            Magnet.transform.position = start_pos;
-            magnetic_susceptibility = 1;
-            auxilary_field = new Vector3(1, 5, 1);
+            auxilary_field = iAux;
+
+            Dipole_moment();
+
         }
 
         private void Dipole_moment()
@@ -52,7 +49,18 @@ namespace Assets.Scripts
              MagnetPosition = Magnet.transform.position;
         }
 
+        public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, Vector3 iAux, float iSus = 1)
+        {
+            Magnet_class mag = new Magnet_class(prefab, start_pos, iAux, iSus);
+            Magnet_list.Add(mag);
+        }
 
+        public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, float iSus = 1)
+        {
+            Vector3 DefaultAux = new Vector3(1, 5, 1);
+            Magnet_class mag = new Magnet_class(prefab, start_pos, DefaultAux, iSus);
+            Magnet_list.Add(mag);
+        }
 
     }
 }
