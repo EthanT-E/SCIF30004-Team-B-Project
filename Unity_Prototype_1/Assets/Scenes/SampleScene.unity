@@ -576,7 +576,6 @@ MonoBehaviour:
   b_factor: 2
   radius_of_influence: 0.4
   max_B_field_value: 0
-  dipole_moment: {x: 1, y: 5, z: 1}
   mag_num: 0
 --- !u!1 &335897072
 GameObject:
@@ -697,9 +696,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284477316}
-        m_TargetAssemblyTypeName: BField, Assembly-CSharp
-        m_MethodName: generate_magnets
+      - m_Target: {fileID: 1900201847}
+        m_TargetAssemblyTypeName: GenerateMagnet, Assembly-CSharp
+        m_MethodName: button_press
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -708,7 +707,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &347517126
 MonoBehaviour:
   m_ObjectHideFlags: 0

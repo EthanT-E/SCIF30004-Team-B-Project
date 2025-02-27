@@ -16,7 +16,6 @@ public class BField : MonoBehaviour
     public float b_factor = 4;
     public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
-    public Vector3 dipole_moment = new Vector3(1, 5, 1);
     public int mag_num;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,7 +23,7 @@ public class BField : MonoBehaviour
     {
         Magnet_class.Generate_magnet(magnetPrefab,magnets,new Vector3(-2,1,0)); // generates the magnets
         Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0),new Vector3(2,10,2),2);
-
+        mag_num = magnets.Count;
         generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap/2;
         for (int i=0; i<Arrows.Count;i++) //iterates through all arrows
