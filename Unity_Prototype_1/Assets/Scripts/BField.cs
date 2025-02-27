@@ -16,8 +16,6 @@ public class BField : MonoBehaviour
     public float b_factor = 4;
     public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
-    public Vector3 dipole_moment = new Vector3(1, 5, 1);
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
