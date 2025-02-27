@@ -32,7 +32,7 @@ public class BField : MonoBehaviour
             bool active = false;
             for (int j = 0; j < magnets.Count; j++)
             {
-                float distance = Vector3.Distance(magnets[i].MagnetPosition, arrow_position);
+                float distance = Vector3.Distance(magnets[j].MagnetPosition, arrow_position);
                 if (distance < radius_of_influence && distance > min_radius_of_influence)
                 {
                     active = true;
@@ -115,7 +115,7 @@ public class BField : MonoBehaviour
         return resultant_b_field;
     }
 
-    void generate_magnets()
+    public void generate_magnets()
     {
         GameObject magnet = Instantiate(magnetPrefab);
         Magnet_class mag = new Magnet_class(magnet,new Vector3(-2.5f,1,0.5f));

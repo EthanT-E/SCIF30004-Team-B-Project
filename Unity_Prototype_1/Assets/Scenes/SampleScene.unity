@@ -697,9 +697,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1900201847}
-        m_TargetAssemblyTypeName: GenerateMagnet, Assembly-CSharp
-        m_MethodName: button_press
+      - m_Target: {fileID: 284477316}
+        m_TargetAssemblyTypeName: BField, Assembly-CSharp
+        m_MethodName: generate_magnets
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

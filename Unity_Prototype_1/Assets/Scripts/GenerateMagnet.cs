@@ -21,8 +21,8 @@ public class GenerateMagnet : MonoBehaviour
     {
         GameObject magnet = Instantiate(magnetPrefab);
         Magnet_class newmag = new Magnet_class(magnet,new Vector3(-2.5f,1,0));
-        mag.set_suscept(magslider.value);
-        mag.set_auxiliary(new Vector3(0,auxslider.value,0));
+        newmag.set_suscept(magslider.value);
+        newmag.set_auxiliary(new Vector3(0,auxslider.value,0));
         bscript.magnets.Add(newmag);
     }
 }
