@@ -1,10 +1,10 @@
 # ninja log v5
-44	2507	7622313023391006	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c1b496bbf25a29b7
-0	2585	7622313024156578	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	438796a7baf106b1
-70	2626	7622313024610870	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	daf1241a73a67c02
-56	2792	7622313026142552	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d6ed0c053f36772e
-25	2795	7622313026319089	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	13feb48fd957b983
-8	2928	7622313027707612	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	c7ee7dc65c9c6cc3
-35	3221	7622313030631491	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	dbe6d2e223a68787
-16	3415	7622313032660473	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f8ed345e24e0ddc9
-3416	3642	7622313035040873	C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/Unity_Prototype_1/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/24682h4z/obj/arm64-v8a/libgame.so	4ffd27d761a355ff
+28	1992	7624107850689684	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c1b496bbf25a29b7
+7	2052	7624107851303921	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	438796a7baf106b1
+47	2061	7624107851365040	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	daf1241a73a67c02
+37	2142	7624107852218399	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	13feb48fd957b983
+57	2182	7624107852604756	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d6ed0c053f36772e
+0	2272	7624107853565591	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	c7ee7dc65c9c6cc3
+20	2450	7624107855388060	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	dbe6d2e223a68787
+14	2568	7624107856547735	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f8ed345e24e0ddc9
+2568	2741	7624107858335395	C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/Unity_Prototype_1/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/24682h4z/obj/arm64-v8a/libgame.so	4ffd27d761a355ff
