@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_Name
-      value: MagnetModel
+      value: Magnet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -65,6 +65,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9091264359371675187}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -9187889118880762555}
   m_SourcePrefab: {fileID: 100100000, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
 --- !u!1 &8798230830766133253 stripped
 GameObject:
@@ -134,7 +137,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 3
+    m_Bits: 4294967295
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -166,10 +169,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -9187889118880762555}
+        m_TargetAssemblyTypeName: Assets.Scripts.Magnet_class, Assembly-CSharp
+        m_MethodName: Send_Self
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -9187889118880762555}
+        m_TargetAssemblyTypeName: Assets.Scripts.Magnet_class, Assembly-CSharp
+        m_MethodName: unsend_Self
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -241,3 +268,20 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &-9187889118880762555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798230830766133253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8409a080cd3b72b42b696055e9aee4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Magnet: {fileID: 0}
+  MagnetPosition: {x: 0, y: 0, z: 0}
+  magnetic_susceptibility: 0
+  auxilary_field: {x: 0, y: 0, z: 0}
+  dipole_moment: {x: 0, y: 0, z: 0}

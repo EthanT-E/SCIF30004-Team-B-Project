@@ -11,7 +11,7 @@ public class BField : MonoBehaviour
     public GameObject arrowPrefab;
     public float min_radius_of_influence;
     public List<GameObject> Arrows = new List<GameObject>();
-    public Vector3 field_size = new Vector3(3,3,2);
+    public Vector3 field_size = new Vector3(3, 3, 2);
     public float arrow_gap = 0.15f;
     public float b_factor = 4;
     public float radius_of_influence = 0.4f;
@@ -19,12 +19,12 @@ public class BField : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Magnet_class.Generate_magnet(magnetPrefab,magnets,new Vector3(-2,1,0)); // generates the magnets
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0),new Vector3(2,10,2),2);
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(0, -6969, 0), 1.3E-3f); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(0, 6969, 0), 1.3E-3f);
 
-        generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
-        min_radius_of_influence = arrow_gap/2;
-        for (int i=0; i<Arrows.Count;i++) //iterates through all arrows
+        generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
+        min_radius_of_influence = arrow_gap / 2;
+        for (int i = 0; i < Arrows.Count; i++) //iterates through all arrows
         {
             Vector3 arrow_position = Arrows[i].transform.position;
             bool active = false;
@@ -53,10 +53,11 @@ public class BField : MonoBehaviour
                 Arrows[i].SetActive(false);
             }
         }
-        
+
     }
 
-   
+
+
 
     // Update is called once per frame
     void Update()
@@ -70,9 +71,9 @@ public class BField : MonoBehaviour
                 magnets[i].new_pos();
             }
         }
-        if(has_moved)
+        if (has_moved)
         {
-            for (int i=0; i<Arrows.Count;i++)
+            for (int i = 0; i < Arrows.Count; i++)
             {
                 Vector3 arrow_position = Arrows[i].transform.position;
                 bool active = false;
@@ -93,17 +94,18 @@ public class BField : MonoBehaviour
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
 
-                    float colorscale = 60*(b_field.magnitude/max_B_field_value);
-                    if(colorscale>1){
+                    float colorscale = 60 * (b_field.magnitude / max_B_field_value);
+                    if (colorscale > 1)
+                    {
                         colorscale = 1f;
                     }
-                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1,1-colorscale,0,colorscale);
+                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1, 1 - colorscale, 0, colorscale);
                 }
                 else
                 {
                     Arrows[i].SetActive(false);
                 }
-            } 
+            }
         }
     }
 
@@ -117,7 +119,7 @@ public class BField : MonoBehaviour
                                                   arrow_pos.z - magnets[i].MagnetPosition.z).normalized;
             resultant_b_field += 1e-7f * (3 * (Vector3.Dot(magnets[i].dipole_moment, vector_distance)) * vector_distance - magnets[i].dipole_moment)
                                             / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, arrow_pos), 3);
-            
+
         }
 
         return resultant_b_field;
