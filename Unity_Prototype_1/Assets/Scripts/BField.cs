@@ -13,7 +13,6 @@ public class BField : MonoBehaviour
     public List<GameObject> Arrows = new List<GameObject>();
     public Vector3 field_size = new Vector3(3,3,2);
     public float arrow_gap = 0.15f;
-    public float b_factor = 4;
     public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
     public int mag_num;
@@ -22,7 +21,7 @@ public class BField : MonoBehaviour
     void Start()
     {
         Magnet_class.Generate_magnet(magnetPrefab,magnets,new Vector3(-2,1,0)); // generates the magnets
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0),new Vector3(2,10,2),2);
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0),new Vector3(2,2,10),2);
         mag_num = magnets.Count;
         generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap/2;
@@ -43,7 +42,7 @@ public class BField : MonoBehaviour
             {
                 Vector3 b_field = calculate_b_field(arrow_position);
 
-                Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+                Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
                 if (b_field.magnitude > max_B_field_value)
                 {
@@ -71,6 +70,12 @@ public class BField : MonoBehaviour
                 has_moved = true;
                 magnets[i].new_pos();
             }
+            if (magnets[i].MagnetRotation!=magnets[i].Magnet.transform.rotation)
+            {
+                has_moved = true;
+                magnets[i].new_rot();
+                magnets[i].update_dipole();
+            }
         }
         if((has_moved)||(mag_num!=magnets.Count))
         {
@@ -93,7 +98,7 @@ public class BField : MonoBehaviour
                 if (active)
                 {
                     Vector3 b_field = calculate_b_field(arrow_position);
-                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
+                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
 
                     float colorscale = 60*(b_field.magnitude/max_B_field_value);
