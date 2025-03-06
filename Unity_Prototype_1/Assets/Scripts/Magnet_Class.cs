@@ -16,7 +16,9 @@ namespace Assets.Scripts
         public float magnetic_susceptibility;
         public Vector3 auxilary_field;
         public Vector3 dipole_moment;
-
+        public Vector3 max_B_field;
+        public float max_B_field_value;
+        public float Radius_of_influence;
         public Magnet_class(GameObject prefab, Vector3 start_pos, Vector3 iAux, float iSus = 1)
         {
             Magnet = Instantiate(prefab);
@@ -80,6 +82,13 @@ namespace Assets.Scripts
             }
         }
 
+        public Vector3 closest_arrow(float arrow_gap)
+        {
+        Vector3 closest_arrow = new Vector3(Magnet.transform.position.x - arrow_gap/20,
+                                        Magnet.transform.position.y - arrow_gap/20,
+                                        Magnet.transform.position.z - arrow_gap/20);
+        return closest_arrow;
+        }
 
         public void unsend_Self(SelectExitEventArgs args)
         {
