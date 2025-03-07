@@ -13,9 +13,11 @@ namespace Assets.Scripts
     {
         public GameObject Magnet;
         public Vector3 MagnetPosition;
+        public Quaternion MagnetRotation;
         public float magnetic_susceptibility;
         public Vector3 auxilary_field;
         public Vector3 dipole_moment;
+        public bool UI_value_change = false;
 
         public Magnet_class(GameObject prefab, Vector3 start_pos, Vector3 iAux, float iSus = 1)
         {
@@ -42,19 +44,30 @@ namespace Assets.Scripts
         public void set_suscept(float Ichi)
         {
             magnetic_susceptibility = Ichi;
-            Dipole_moment();
+            dipole_moment = Dipole_moment();
         }
 
         public void set_auxiliary(Vector3 iAux)
         {
             auxilary_field = iAux;
-            Dipole_moment();
+            dipole_moment = Dipole_moment();
         }
 
         public void new_pos()
         {
             MagnetPosition = Magnet.transform.position;
             Magnet.GetComponent<Magnet_class>().MagnetPosition = Magnet.transform.position;
+        }
+
+        public void new_rot()
+        {
+            MagnetRotation = Magnet.transform.rotation;
+        }
+        
+        public void update_dipole()
+        {
+            dipole_moment = Dipole_moment();
+            dipole_moment =  MagnetRotation*dipole_moment;
         }
 
         public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, Vector3 iAux, float iSus = 1)
@@ -65,7 +78,7 @@ namespace Assets.Scripts
 
         public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, float iSus = 1)
         {
-            Vector3 DefaultAux = new Vector3(1, 5, 1);
+            Vector3 DefaultAux = new Vector3(1, 1, 5);
             Magnet_class mag = new Magnet_class(prefab, start_pos, DefaultAux, iSus);
             Magnet_list.Add(mag);
         }

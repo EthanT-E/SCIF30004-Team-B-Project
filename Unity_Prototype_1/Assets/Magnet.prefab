@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalRotation.y
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Magnet
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      propertyPath: m_TagString
+      value: NotUI
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67,7 +71,10 @@ PrefabInstance:
       addedObject: {fileID: 9091264359371675187}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -9187889118880762555}
+      addedObject: {fileID: 2116909984098301086}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3911250186157583332}
   m_SourcePrefab: {fileID: 100100000, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
 --- !u!1 &8798230830766133253 stripped
 GameObject:
@@ -170,7 +177,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -9187889118880762555}
+      - m_Target: {fileID: 3911250186157583332}
         m_TargetAssemblyTypeName: Assets.Scripts.Magnet_class, Assembly-CSharp
         m_MethodName: Send_Self
         m_Mode: 0
@@ -185,7 +192,7 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -9187889118880762555}
+      - m_Target: {fileID: 3911250186157583332}
         m_TargetAssemblyTypeName: Assets.Scripts.Magnet_class, Assembly-CSharp
         m_MethodName: unsend_Self
         m_Mode: 0
@@ -211,7 +218,19 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2116909984098301086}
+        m_TargetAssemblyTypeName: ChangeTag, Assembly-CSharp
+        m_MethodName: change_tag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -268,7 +287,20 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!114 &-9187889118880762555
+--- !u!114 &2116909984098301086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798230830766133253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8c8aa4140253f4bbdea5785df50401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Magnet: {fileID: 8798230830766133253}
+--- !u!114 &3911250186157583332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,6 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Magnet: {fileID: 0}
   MagnetPosition: {x: 0, y: 0, z: 0}
+  MagnetRotation: {x: 0, y: 0, z: 0, w: 0}
   magnetic_susceptibility: 0
   auxilary_field: {x: 0, y: 0, z: 0}
   dipole_moment: {x: 0, y: 0, z: 0}
+  UI_value_change: 0

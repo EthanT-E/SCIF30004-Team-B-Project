@@ -13,14 +13,13 @@ public class BField : MonoBehaviour
     public List<GameObject> Arrows = new List<GameObject>();
     public Vector3 field_size = new Vector3(3, 3, 2);
     public float arrow_gap = 0.15f;
-    public float b_factor = 4;
     public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(0, -6969, 0), 1.3E-3f); // generates the magnets
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(0, 6969, 0), 1.3E-3f);
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(1,1,5), 1); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(1,1,5), 1);
 
         generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap / 2;
@@ -41,7 +40,7 @@ public class BField : MonoBehaviour
             {
                 Vector3 b_field = calculate_b_field(arrow_position);
 
-                Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+                Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
                 if (b_field.magnitude > max_B_field_value)
                 {
@@ -62,16 +61,26 @@ public class BField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool has_moved = false;
+        bool change = false;
         for (int i = 0; i < magnets.Count; i++)
         {
             if (magnets[i].MagnetPosition != magnets[i].Magnet.transform.position)
             {
-                has_moved = true;
+                change = true;
                 magnets[i].new_pos();
             }
+            if(magnets[i].UI_value_change)
+            {
+                change = true;
+            }
+            if (magnets[i].MagnetRotation!=magnets[i].Magnet.transform.rotation)
+            {
+                change = true;
+                magnets[i].new_rot();
+                magnets[i].update_dipole();
+            }
         }
-        if (has_moved)
+        if (change)
         {
             for (int i = 0; i < Arrows.Count; i++)
             {
@@ -91,7 +100,7 @@ public class BField : MonoBehaviour
                 if (active)
                 {
                     Vector3 b_field = calculate_b_field(arrow_position);
-                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
+                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
 
                     float colorscale = 60 * (b_field.magnitude / max_B_field_value);
