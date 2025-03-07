@@ -13,22 +13,19 @@ public class BField : MonoBehaviour
     public GameObject arrowPrefab;
     public float min_radius_of_influence;
     public List<GameObject> Arrows = new List<GameObject>();
-    public Vector3 field_size = new Vector3(3,3,2);
+    public Vector3 field_size = new Vector3(3, 3, 2);
     public float arrow_gap = 0.15f;
-    public float b_factor = 4;
     public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
-    public Vector3 dipole_moment = new Vector3(1, 5, 1);
-    public int mag_num;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        generate_magnets(); // generates the magnets
-        mag_num = magnets.Count;
-        generate_field(field_size,arrow_gap,Arrows); //generates the field of arrows
-        min_radius_of_influence = arrow_gap/2;
-        for (int i=0; i<Arrows.Count;i++) //iterates through all arrows
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(1,1,5), 1); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(1,1,5), 1);
+
+        generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
+        min_radius_of_influence = arrow_gap / 2;
+        for (int i = 0; i < Arrows.Count; i++) //iterates through all arrows
         {
             Vector3 arrow_position = Arrows[i].transform.position;
             bool active = false;
@@ -44,34 +41,50 @@ public class BField : MonoBehaviour
             if (active)
             {
                 Vector3 b_field = calculate_b_field(arrow_position);
-                Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
+
+                Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
-                if(b_field.magnitude>max_B_field_value)
+                if (b_field.magnitude > max_B_field_value)
+                {
                     max_B_field_value = b_field.magnitude;
+                }
             }
             else
             {
                 Arrows[i].SetActive(false);
             }
         }
+
     }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
-        bool has_moved = false;
+        bool change = false;
         for (int i = 0; i < magnets.Count; i++)
         {
             if (magnets[i].MagnetPosition != magnets[i].Magnet.transform.position)
             {
-                has_moved = true;
+                change = true;
                 magnets[i].new_pos();
             }
+            if(magnets[i].UI_value_change)
+            {
+                change = true;
+            }
+            if (magnets[i].MagnetRotation!=magnets[i].Magnet.transform.rotation)
+            {
+                change = true;
+                magnets[i].new_rot();
+                magnets[i].update_dipole();
+            }
         }
-        if((has_moved)||(mag_num!=magnets.Count))
+        if (change)
         {
-            mag_num = magnets.Count;
-            for (int i=0; i<Arrows.Count;i++)
+            for (int i = 0; i < Arrows.Count; i++)
             {
                 Vector3 arrow_position = Arrows[i].transform.position;
                 bool active = false;
@@ -83,23 +96,27 @@ public class BField : MonoBehaviour
                         active = true;
                         break;
                     }
+
+
                 }
                 if (active)
                 {
                     Vector3 b_field = calculate_b_field(arrow_position);
-                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
+                    Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
-                    float colorscale = 60*(b_field.magnitude/max_B_field_value);
-                    if(colorscale>1){
+
+                    float colorscale = 60 * (b_field.magnitude / max_B_field_value);
+                    if (colorscale > 1)
+                    {
                         colorscale = 1f;
                     }
-                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1,1-colorscale,0,colorscale);
+                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1, 1 - colorscale, 0, colorscale);
                 }
                 else
                 {
                     Arrows[i].SetActive(false);
                 }
-            } 
+            }
         }
     }
 
@@ -111,23 +128,13 @@ public class BField : MonoBehaviour
             Vector3 vector_distance = new Vector3(arrow_pos.x - magnets[i].MagnetPosition.x,
                                                   arrow_pos.y - magnets[i].MagnetPosition.y,
                                                   arrow_pos.z - magnets[i].MagnetPosition.z).normalized;
-            resultant_b_field += 1e-7f * (3 * (Vector3.Dot(dipole_moment, vector_distance)) * vector_distance - dipole_moment)
+            resultant_b_field += 1e-7f * (3 * (Vector3.Dot(magnets[i].dipole_moment, vector_distance)) * vector_distance - magnets[i].dipole_moment)
                                             / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, arrow_pos), 3);
+
         }
+
         return resultant_b_field;
-    }
-
-    public void generate_magnets()
-    {
-        GameObject magnet = Instantiate(magnetPrefab);
-        Magnet_class mag = new Magnet_class(magnet,new Vector3(-2.5f,1,0.5f));
-        mag.set_suscept(2f);
-        magnets.Add(mag);
-
-        GameObject magnet2 = Instantiate(magnetPrefab);
-        Magnet_class mag2 = new Magnet_class(magnet2,new Vector3(-2.5f,1,-0.5f));
-        mag2.set_auxiliary(new Vector3(2, 10, 2));
-        magnets.Add(mag2);
+		
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)

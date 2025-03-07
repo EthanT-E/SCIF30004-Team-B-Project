@@ -8,21 +8,22 @@ public class GenerateMagnet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     BField bscript;
     public GameObject magnetPrefab;
-    bool buttonpress=false;
     public Slider auxslider;
     public Slider magslider;
+    Vector3 pos = new Vector3(-2, 1, 0);
     void Start()
     {
-        bscript = GameObject.Find("ScriptAs ObjectName").GetComponent<BField>();
+        bscript = GameObject.Find("System").GetComponent<BField>();
+    }
+
+    void Update()
+    {
     }
 
     // Update is called once per frame
     public void button_press()
     {
-        GameObject magnet = Instantiate(magnetPrefab);
-        Magnet_class newmag = new Magnet_class(magnet,new Vector3(-2.5f,1,0));
-        newmag.set_suscept(magslider.value);
-        newmag.set_auxiliary(new Vector3(0,auxslider.value,0));
-        bscript.magnets.Add(newmag);
+        Vector3 aux = new Vector3(1,1,auxslider.value);
+        Magnet_class.Generate_magnet(magnetPrefab, bscript.magnets, pos,aux,magslider.value);
     }
 }
