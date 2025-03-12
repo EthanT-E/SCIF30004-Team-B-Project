@@ -26,7 +26,7 @@ namespace Assets.Scripts
             magnetic_susceptibility = iSus;
             auxilary_field = iAux;
             dipole_moment = Dipole_moment();
-
+            
             Magnet.GetComponent<Magnet_class>().MagnetPosition = Magnet.transform.position;
             Magnet.GetComponent<Magnet_class>().magnetic_susceptibility = iSus;
 
@@ -68,6 +68,16 @@ namespace Assets.Scripts
         {
             dipole_moment = Dipole_moment();
             dipole_moment =  MagnetRotation*dipole_moment;
+        }
+
+        public void influence_force(Vector3 force)
+        {
+            Magnet.GetComponent<Rigidbody>().AddForce(force * Mathf.Clamp(force.magnitude, 15.0f, 100.0f), ForceMode.Impulse);
+        }
+
+        public void influence_torque(Vector3 torque)
+        {
+            Magnet.GetComponent<Rigidbody>().AddTorque(torque * Mathf.Clamp(torque.magnitude, 1.0f, 30.0f), ForceMode.Impulse);
         }
 
         public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, Vector3 iAux, float iSus = 1)
