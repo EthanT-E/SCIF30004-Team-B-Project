@@ -88,7 +88,7 @@ namespace Assets.Scripts
 
         public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, float iSus = 1)
         {
-            Vector3 DefaultAux = new Vector3(1, 1, 5);
+            Vector3 DefaultAux = new Vector3(1, 0, 0);
             Magnet_class mag = new Magnet_class(prefab, start_pos, DefaultAux, iSus);
             Magnet_list.Add(mag);
         }

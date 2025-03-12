@@ -20,8 +20,8 @@ public class BField : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(5,0,0), 1); // generates the magnets
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(-5,0,0), 1);
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(3,0,0), 1); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(-3,0,0), 1);
 
         generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap / 2;

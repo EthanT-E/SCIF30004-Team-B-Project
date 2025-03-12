@@ -25,7 +25,7 @@ public class MagUI : MonoBehaviour
                 UI_on = true;
                 if (auxslider.value!=bscript.magnets[i].auxilary_field.y)
                 {
-                    bscript.magnets[i].set_auxiliary(new Vector3(1,1, auxslider.value));
+                    bscript.magnets[i].set_auxiliary(new Vector3(auxslider.value,0,0));
                     bscript.magnets[i].UI_value_change = true;
                 }
                 if (magslider.value!=bscript.magnets[i].magnetic_susceptibility)

@@ -23,7 +23,7 @@ public class GenerateMagnet : MonoBehaviour
     // Update is called once per frame
     public void button_press()
     {
-        Vector3 aux = new Vector3(1,1,auxslider.value);
+        Vector3 aux = new Vector3(auxslider.value,0,0);
         Magnet_class.Generate_magnet(magnetPrefab, bscript.magnets, pos,aux,magslider.value);
     }
 }
