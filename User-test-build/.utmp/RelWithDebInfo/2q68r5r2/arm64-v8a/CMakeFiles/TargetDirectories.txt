@@ -1,0 +1,5 @@
+C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/User-test-build/.utmp/RelWithDebInfo/2q68r5r2/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/User-test-build/.utmp/RelWithDebInfo/2q68r5r2/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/User-test-build/.utmp/RelWithDebInfo/2q68r5r2/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/User-test-build/.utmp/RelWithDebInfo/2q68r5r2/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/Nate/Documents/SCIF30004_pulls/SCIF30004-Team-B-Project/User-test-build/.utmp/RelWithDebInfo/2q68r5r2/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
