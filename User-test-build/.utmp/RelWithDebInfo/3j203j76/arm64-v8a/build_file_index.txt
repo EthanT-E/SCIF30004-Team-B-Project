@@ -1,0 +1,2 @@
+C:\Users\adamj\Documents\VRTutorial2\SCIF30004-Team-B-Project\User-test-build\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\adamj\Documents\VRTutorial2\SCIF30004-Team-B-Project\User-test-build\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

@@ -7,22 +7,20 @@ public class MagUI : MonoBehaviour
     public Slider auxslider;
     public Slider magslider;
     public GameObject Mag_UI;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Mag_UI.SetActive(true);
         bscript = GameObject.Find("System").GetComponent<BField>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool UI_on = false;
         for(int i = 0; i < bscript.magnets.Count; i++)
         {
             if (bscript.magnets[i].Magnet.tag=="UI")
             {
-                UI_on = true;
                 if (auxslider.value!=bscript.magnets[i].auxilary_field.y)
                 {
                     bscript.magnets[i].set_auxiliary(new Vector3(auxslider.value,0,0));
@@ -35,13 +33,17 @@ public class MagUI : MonoBehaviour
                 }
             }
         }
-        if (UI_on==true)
+    }
+    public void delete_magnet()
+    {
+    for(int i = 0; i < bscript.magnets.Count; i++)
         {
-            Mag_UI.SetActive(true);
-        }
-        else
-        {
-            Mag_UI.SetActive(false);
+            if (bscript.magnets[i].Magnet.tag=="UI")
+            {
+                Destroy(bscript.magnets[i].Magnet);
+                bscript.magnets.RemoveAt(i);
+                bscript.magnets[i].UI_value_change = true;
+            }
         }
     }
 }
