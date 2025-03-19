@@ -9,6 +9,8 @@ public class scannerswitch : MonoBehaviour
     public InteractionLayerMask mag_layer;
     public InteractionLayerMask scanner_layer;
     public GameObject ScannerUI;
+    public GameObject scanner_object;
+    public GameObject Controller;
     // Update is called once per frame
     private bool Scanner = false;
     void Update()
@@ -23,11 +25,15 @@ public class scannerswitch : MonoBehaviour
         {
             interactor.interactionLayers = scanner_layer;
             ScannerUI.SetActive(true);
+            scanner_object.SetActive(true);
+            Controller.SetActive(false);
         }
         else
         {
             interactor.interactionLayers = mag_layer;
             ScannerUI.SetActive(false);
+            scanner_object.SetActive(false);
+            Controller.SetActive(true);
         }
     }
 }
