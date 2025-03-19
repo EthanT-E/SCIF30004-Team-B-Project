@@ -24,11 +24,17 @@ public class BField : MonoBehaviour
         min_radius_of_influence = arrow_gap / 2;
         for (int i = 0; i < magnets.Count; i++)
         {
-            float costheta_init = calculate_costheta(magnets[i].closest_arrow(arrow_gap),magnets[i].dipole_moment);
-            magnets[i].max_B_field_value = calculate_b_field_magnitude(magnets[i].closest_arrow(arrow_gap).magnitude,costheta_init,magnets[i].dipole_moment.magnitude);
-            float B_field_factor = magnets[i].max_B_field_value/50;
+            magnets[i].new_pos();
+            Vector3 close_point = magnets[i].closest_arrow(arrow_gap);
+            float costheta_init = calculate_costheta(close_point,magnets[i].dipole_moment);
+            magnets[i].max_B_field_value = calculate_b_field_magnitude(close_point.magnitude,costheta_init,magnets[i].dipole_moment.magnitude);
+            // Debug.Log("close arrow: "+magnets[i].closest_arrow(arrow_gap)+"magnet: "+magnets[i].Magnet.transform.position);
+            float B_field_factor = magnets[i].max_B_field_value/Mathf.Pow(30,3);
+
+            
+
             float R1 = calculate_r_magnitude(B_field_factor,costheta_init,magnets[i].dipole_moment.magnitude)*2f;
-            Debug.Log(R1);
+            Debug.Log("max b field: "+magnets[i].max_B_field_value+" close point value:"+close_point+" R1: "+R1);
             magnets[i].Radius_of_influence = R1;
         }
 
@@ -48,10 +54,11 @@ public class BField : MonoBehaviour
             if (active)
             {
                 Vector3 b_field = calculate_b_field(arrow_position);
-
-                float costheta = calculate_costheta(arrow_position,magnets[0].dipole_moment);
-                // Debug.Log("comparison="+b_field.magnitude+" & "+calculate_b_field_magnitude(arrow_position.magnitude,costheta,magnets[0].dipole_moment.magnitude));
-
+                Vector3 r = magnets[0].calculate_r(arrow_position);
+                float costheta = calculate_costheta(r,magnets[0].dipole_moment);
+                Debug.Log("comparison="+b_field.magnitude+" & "+calculate_b_field_magnitude(r.magnitude,costheta,magnets[0].dipole_moment.magnitude)+
+                " r value: "+ r);
+                // Debug.Log(b_field);
                 Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
 
@@ -99,15 +106,19 @@ public class BField : MonoBehaviour
                 if (active)
                 {
                     Vector3 b_field = calculate_b_field(arrow_position);
+                    Vector3 r = magnets[0].calculate_r(arrow_position);
+                    float cost = calculate_costheta(r,magnets[0].dipole_moment);
+                    float b_field_value = calculate_b_field_magnitude(r.magnitude,cost,magnets[0].dipole_moment.magnitude);
+                    
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_factor * b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
                     
                     float colorscale = b_field.magnitude / magnets[0].max_B_field_value;
+                    // Debug.Log("magnitude_1: "+b_field_value+"   magnitude_2: "+b_field.magnitude+"  max_b_field"+magnets[0].max_B_field_value);
                     if (colorscale > 1)
                     {
                         colorscale = 1f;
                     }
-                    print(colorscale);
                     Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1, 1 - colorscale, 0, colorscale);
                 }
                 else

@@ -84,11 +84,20 @@ namespace Assets.Scripts
 
         public Vector3 closest_arrow(float arrow_gap)
         {
-        Vector3 closest_arrow = new Vector3(Magnet.transform.position.x - arrow_gap/20,
-                                        Magnet.transform.position.y - arrow_gap/20,
-                                        Magnet.transform.position.z - arrow_gap/20);
+        Vector3 closest_arrow = new Vector3(arrow_gap,
+                                        arrow_gap,
+                                        arrow_gap);
         return closest_arrow;
         }
+
+        public Vector3 calculate_r(Vector3 position)
+        {
+        Vector3 r = new Vector3(Magnet.transform.position.x - position.x,
+                                        Magnet.transform.position.y - position.y,
+                                        Magnet.transform.position.z - position.z);
+        return r;
+        }
+
 
         public void unsend_Self(SelectExitEventArgs args)
         {
