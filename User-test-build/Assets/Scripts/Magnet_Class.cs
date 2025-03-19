@@ -18,7 +18,7 @@ namespace Assets.Scripts
         public Vector3 auxilary_field;
         public Vector3 dipole_moment;
         public bool UI_value_change = false;
-
+        public bool holding=false;
         public Magnet_class(GameObject prefab, Vector3 start_pos, Vector3 iAux, float iSus = 1)
         {
             Magnet = Instantiate(prefab);
@@ -100,6 +100,8 @@ namespace Assets.Scripts
                 RecieveAndSendToSystem reciever = controller.GetComponent<RecieveAndSendToSystem>();
                 Debug.Log($"DIpoe: {this.GetComponent<Magnet_class>().dipole_moment.x},{this.GetComponent<Magnet_class>().dipole_moment.y},{this.GetComponent<Magnet_class>().dipole_moment.z}");
                 reciever.get_magnet(this.GetComponent<Magnet_class>());
+                ChangeTag holding = Magnet.GetComponent<ChangeTag>();
+                holding.not_hovering();
             }
         }
 
@@ -110,6 +112,8 @@ namespace Assets.Scripts
             {
                 RecieveAndSendToSystem reciever = controller.GetComponent<RecieveAndSendToSystem>();
                 reciever.get_magnet(null);
+                ChangeTag holding = Magnet.GetComponent<ChangeTag>();
+                holding.not_hovering();
             }
         }
 
