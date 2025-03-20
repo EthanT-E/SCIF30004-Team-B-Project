@@ -16,7 +16,6 @@ public class BField : MonoBehaviour
     public Vector3 field_size = new Vector3(3, 3, 2);
     public float arrow_gap = 0.15f;
     public float radius_of_influence = 0.4f;
-    public float max_B_field_value = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +24,22 @@ public class BField : MonoBehaviour
 
         generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap / 2;
+        for (int i = 0; i < magnets.Count; i++)
+        {
+            magnets[i].new_pos();
+            Vector3 close_point = magnets[i].closest_arrow(arrow_gap);
+            float costheta_init = calculate_costheta(close_point,magnets[i].dipole_moment);
+            magnets[i].max_B_field_value = calculate_b_field_magnitude(close_point.magnitude,costheta_init,magnets[i].dipole_moment.magnitude);
+            // Debug.Log("close arrow: "+magnets[i].closest_arrow(arrow_gap)+"magnet: "+magnets[i].Magnet.transform.position);
+            float B_field_factor = magnets[i].max_B_field_value/Mathf.Pow(30,3);
+
+            
+
+            float R1 = calculate_r_magnitude(B_field_factor,costheta_init,magnets[i].dipole_moment.magnitude)*2f;
+            Debug.Log("max b field: "+magnets[i].max_B_field_value+" close point value:"+close_point+" R1: "+R1);
+            magnets[i].Radius_of_influence = R1;
+        }
+
         for (int i = 0; i < Arrows.Count; i++) //iterates through all arrows
         {
             Vector3 arrow_position = Arrows[i].transform.position;
@@ -32,7 +47,7 @@ public class BField : MonoBehaviour
             for (int j = 0; j < magnets.Count; j++)
             {
                 float distance = Vector3.Distance(magnets[j].MagnetPosition, arrow_position);
-                if (distance < radius_of_influence && distance > min_radius_of_influence)
+                if (distance < magnets[j].Radius_of_influence && distance > min_radius_of_influence)
                 {
                     active = true;
                     break;
@@ -44,10 +59,7 @@ public class BField : MonoBehaviour
 
                 Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
                 Arrows[i].SetActive(true);
-                if (b_field.magnitude > max_B_field_value)
-                {
-                    max_B_field_value = b_field.magnitude;
-                }
+
             }
             else
             {
@@ -91,7 +103,7 @@ public class BField : MonoBehaviour
                 for (int j = 0; j < magnets.Count; j++)
                 {
                     float distance = Vector3.Distance(magnets[j].MagnetPosition, arrow_position);
-                    if (distance < radius_of_influence && distance > min_radius_of_influence)
+                    if (distance < magnets[j].Radius_of_influence && distance > min_radius_of_influence)
                     {
                         active = true;
                         break;
@@ -104,8 +116,9 @@ public class BField : MonoBehaviour
                     Vector3 b_field = calculate_b_field(arrow_position);
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
                     Arrows[i].SetActive(true);
-
-                    float colorscale = 60 * (b_field.magnitude / max_B_field_value);
+                    
+                    float colorscale = b_field.magnitude / magnets[0].max_B_field_value;
+                    // Debug.Log("magnitude_1: "+b_field_value+"   magnitude_2: "+b_field.magnitude+"  max_b_field"+magnets[0].max_B_field_value);
                     if (colorscale > 1)
                     {
                         colorscale = 1f;
@@ -180,6 +193,21 @@ public class BField : MonoBehaviour
 		
     }
 
+    float calculate_costheta(Vector3 r,Vector3 m)
+    {
+        float costheta = Vector3.Dot(r,m)/(r.magnitude*m.magnitude);
+        return costheta;
+    }
+    float calculate_b_field_magnitude(float r,float costheta,float m)
+    {
+        return (1e-7f*m*(Mathf.Sqrt(1+3*Mathf.Pow(costheta,2))))/ Mathf.Pow(r,3);
+    }
+    float calculate_r_magnitude(float B,float costheta,float m)
+    {
+        return Mathf.Pow(1e-7f*m*Mathf.Sqrt(1+3*Mathf.Pow(costheta,2)/B),1f/3f);
+    }
+
+
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)
     {
         // iterates over each axes to form a grid of points
@@ -208,4 +236,7 @@ public class BField : MonoBehaviour
         args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldAngle").GetComponent<TMP_Text>().text = string.Format("{0:000}�\n{1:000}�\n{2:000}�", 
                                                                                                     Mathf.Round(direction.x), Mathf.Round(direction.y), Mathf.Round(direction.z));
     }
+
+
+
 }
