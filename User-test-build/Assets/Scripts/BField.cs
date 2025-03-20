@@ -17,6 +17,9 @@ public class BField : MonoBehaviour
     public float arrow_gap = 0.15f;
     public float radius_of_influence = 0.4f;
     public float max_B_field_value = 0f;
+    public GameObject Scanner;
+
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -163,7 +166,7 @@ public class BField : MonoBehaviour
         return force;
     }
 
-    Vector3 calculate_b_field(Vector3 arrow_pos)
+    public Vector3 calculate_b_field(Vector3 arrow_pos)
     {
         Vector3 resultant_b_field = Vector3.zero;
         for (int i = 0; i < magnets.Count; i++)
@@ -211,21 +214,21 @@ public class BField : MonoBehaviour
                 {
                     GameObject arrow = Instantiate(arrowPrefab, transform); //creates arrow
                     arrow.transform.position = new Vector3(x, y, z); //gives arrow coordinates corresponding to grid point
-                    XRSimpleInteractable scanInteractor = arrow.GetComponent("XRSimpleInteractable") as XRSimpleInteractable;
-                    scanInteractor.selectEntered.AddListener(scan);
+                    // XRSimpleInteractable scanInteractor = Scanner.GetComponent("XRSimpleInteractable") as XRSimpleInteractable;
+                    // scanInteractor.selectEntered.AddListener(scan);
                     Arrows.Add(arrow); //Adds arrow to list of arrows
                 }
             }
         }
     }
 
-    void scan(SelectEnterEventArgs args)
-    {
-        Vector3 b_field = calculate_b_field(args.interactableObject.transform.position);
-        args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldVal").GetComponent<TMP_Text>().text = string.Format("{0}\n{1}\n{2}", b_field.x, b_field.y, b_field.z);
-        args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldMag").GetComponent<TMP_Text>().text = string.Format("Magnitude: {0}", Vector3.Magnitude(b_field));
-        Vector3 direction = args.interactableObject.transform.eulerAngles;
-        args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldAngle").GetComponent<TMP_Text>().text = string.Format("{0:000}�\n{1:000}�\n{2:000}�",
-                                                                                                    Mathf.Round(direction.x), Mathf.Round(direction.y), Mathf.Round(direction.z));
-    }
+    // void scan(SelectEnterEventArgs args)
+    // {
+    //     Vector3 b_field = calculate_b_field(args.interactableObject.transform.position);
+    //     args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldVal").GetComponent<TMP_Text>().text = string.Format("{0}\n{1}\n{2}", b_field.x, b_field.y, b_field.z);
+    //     args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldMag").GetComponent<TMP_Text>().text = string.Format("Magnitude: {0}", Vector3.Magnitude(b_field));
+    //     Vector3 direction = args.interactableObject.transform.eulerAngles;
+    //     args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldAngle").GetComponent<TMP_Text>().text = string.Format("{0:000}�\n{1:000}�\n{2:000}�",
+    //     Mathf.Round(direction.x), Mathf.Round(direction.y), Mathf.Round(direction.z));
+    // }
 }
