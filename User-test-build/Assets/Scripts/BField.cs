@@ -20,8 +20,8 @@ public class BField : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(3,0,0), 1); // generates the magnets
-        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(-3,0,0), 1);
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(0, 0, 5), 5); // generates the magnets
+        Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(0, 0, 5), 5);
 
         generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap / 2;
@@ -71,11 +71,11 @@ public class BField : MonoBehaviour
                 change = true;
                 magnets[i].new_pos();
             }
-            if(magnets[i].UI_value_change)
+            if (magnets[i].UI_value_change)
             {
                 change = true;
             }
-            if (magnets[i].MagnetRotation!=magnets[i].Magnet.transform.rotation)
+            if (magnets[i].MagnetRotation != magnets[i].Magnet.transform.rotation)
             {
                 change = true;
                 magnets[i].new_rot();
@@ -127,25 +127,25 @@ public class BField : MonoBehaviour
                 {
                     if (i != j)
                         force_on_i += Calculate_force_vector(magnets[i], magnets[j]);
-                        
+
                 }
-                torque_on_i = Calculate_magnetic_torque(magnets[i], force_on_i);
+                torque_on_i = Calculate_magnetic_torque(magnets[i], calculate_b_field_except_self(magnets[i].MagnetPosition, i));
                 Debug.Log($"torque on magnet {i} - {torque_on_i.x},{torque_on_i.y},{torque_on_i.z}");
-                
+
                 magnets[i].influence_force(force_on_i);
                 magnets[i].influence_torque(torque_on_i);
-                
+
             }
         }
     }
-    
 
-   Vector3 Calculate_magnetic_torque(Magnet_class magnet, Vector3 b_field)
+
+    Vector3 Calculate_magnetic_torque(Magnet_class magnet, Vector3 b_field)
     {
         return Vector3.Cross(magnet.dipole_moment, b_field);
     }
 
-   Vector3 Calculate_force_vector(Magnet_class magnet1, Magnet_class magnet2)
+    Vector3 Calculate_force_vector(Magnet_class magnet1, Magnet_class magnet2)
     {
         Vector3 dist = magnet1.MagnetPosition - magnet2.MagnetPosition;
         Vector3 dist_norm = dist.normalized;
@@ -177,7 +177,27 @@ public class BField : MonoBehaviour
         }
 
         return resultant_b_field;
-		
+
+    }
+
+
+    Vector3 calculate_b_field_except_self(Vector3 mag_pos, int ignore_index)
+    {
+        Vector3 resultant_b_field = Vector3.zero;
+        for (int i = 0; i < magnets.Count; i++)
+        {
+            if (i != ignore_index)
+            {
+                Vector3 vector_distance = new Vector3(mag_pos.x - magnets[i].MagnetPosition.x,
+                                                    mag_pos.y - magnets[i].MagnetPosition.y,
+                                                    mag_pos.z - magnets[i].MagnetPosition.z).normalized;
+                resultant_b_field += 1e-7f * (3 * (Vector3.Dot(magnets[i].dipole_moment, vector_distance)) * vector_distance - magnets[i].dipole_moment)
+                                                / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, mag_pos), 3);
+            }
+        }
+
+        return resultant_b_field;
+
     }
 
     void generate_field(Vector3 field_size, float arrow_gap, List<GameObject> Arrows)
@@ -205,7 +225,7 @@ public class BField : MonoBehaviour
         args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldVal").GetComponent<TMP_Text>().text = string.Format("{0}\n{1}\n{2}", b_field.x, b_field.y, b_field.z);
         args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldMag").GetComponent<TMP_Text>().text = string.Format("Magnitude: {0}", Vector3.Magnitude(b_field));
         Vector3 direction = args.interactableObject.transform.eulerAngles;
-        args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldAngle").GetComponent<TMP_Text>().text = string.Format("{0:000}�\n{1:000}�\n{2:000}�", 
+        args.interactorObject.transform.parent.Find("ScannerUI").Find("BFieldAngle").GetComponent<TMP_Text>().text = string.Format("{0:000}�\n{1:000}�\n{2:000}�",
                                                                                                     Mathf.Round(direction.x), Mathf.Round(direction.y), Mathf.Round(direction.z));
     }
 }
