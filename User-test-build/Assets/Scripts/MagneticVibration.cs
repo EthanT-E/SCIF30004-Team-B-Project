@@ -35,8 +35,8 @@ public class MagneticVibration : MonoBehaviour
         {
             Debug.Log(Calculate_force(leftMagnet, rightMagnet));
             textmesh.text = $"Magnetic FOrce {Calculate_force(leftMagnet, rightMagnet)} N";
-            float clampedForce = Mathf.Clamp(Calculate_force(leftMagnet, rightMagnet), 15.0f, 1000.0f);
-            float intensity = Mathf.InverseLerp(15.0f, 1000.0f, clampedForce);
+            float clampedForce = Mathf.Clamp(Calculate_force(leftMagnet, rightMagnet), 400.0f, 2000.0f);
+            float intensity = Mathf.InverseLerp(400.0f, 2000.0f, clampedForce);
             leftController.SendHapticImpulse(0, intensity, 0.1f);
             rightController.SendHapticImpulse(0, intensity, 0.1f);
         }
