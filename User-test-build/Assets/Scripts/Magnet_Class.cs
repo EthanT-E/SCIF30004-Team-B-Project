@@ -72,12 +72,14 @@ namespace Assets.Scripts
 
         public void influence_force(Vector3 force)
         {
-            Magnet.GetComponent<Rigidbody>().AddForce(force * Mathf.Clamp(force.magnitude, 15.0f, 100.0f), ForceMode.Impulse);
+            float scale_factor = 1.0f - Mathf.Exp(-force.magnitude / 1E10f);
+            float adjust_magnitude = Mathf.Pow(force.magnitude, 0.65f);
+            Magnet.GetComponent<Rigidbody>().AddForce(force.normalized * scale_factor * adjust_magnitude, ForceMode.Acceleration);
         }
 
         public void influence_torque(Vector3 torque)
         {
-            Magnet.GetComponent<Rigidbody>().AddTorque(torque * Mathf.Clamp(torque.magnitude, 1.0f, 30.0f), ForceMode.Impulse);
+            Magnet.GetComponent<Rigidbody>().AddTorque(torque.normalized * Mathf.Clamp(torque.magnitude, 0.0f, 1E5f), ForceMode.Acceleration);
         }
 
         public static void Generate_magnet(GameObject prefab, List<Magnet_class> Magnet_list, Vector3 start_pos, Vector3 iAux, float iSus = 1)

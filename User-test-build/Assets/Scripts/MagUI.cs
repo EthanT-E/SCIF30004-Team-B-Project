@@ -25,12 +25,12 @@ public class MagUI : MonoBehaviour
                 UI_on = true;
                 if (auxslider.value!=bscript.magnets[i].auxilary_field.y)
                 {
-                    bscript.magnets[i].set_auxiliary(new Vector3(auxslider.value,0,0));
+                    bscript.magnets[i].set_auxiliary(new Vector3(0,0,(Mathf.Abs(auxslider.value) * 5.0f) * Mathf.Sign(auxslider.value)));
                     bscript.magnets[i].UI_value_change = true;
                 }
                 if (magslider.value!=bscript.magnets[i].magnetic_susceptibility)
                 {
-                    bscript.magnets[i].set_suscept(magslider.value);
+                    bscript.magnets[i].set_suscept((magslider.value+2) * 1.75f);
                     bscript.magnets[i].UI_value_change = true;
                 }
             }
