@@ -44,13 +44,13 @@ namespace Assets.Scripts
         public void set_suscept(float Ichi)
         {
             magnetic_susceptibility = Ichi;
-            dipole_moment = Dipole_moment();
+            update_dipole();
         }
 
         public void set_auxiliary(Vector3 iAux)
         {
             auxilary_field = iAux;
-            dipole_moment = Dipole_moment();
+            update_dipole();
         }
 
         public void new_pos()

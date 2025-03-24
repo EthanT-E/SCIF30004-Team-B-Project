@@ -25,7 +25,7 @@ public class VRHeadBlocking : MonoBehaviour
         int size = Physics.OverlapSphereNonAlloc(loc, backupCap, objs, layerMask, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < size; i++)
         {
-            if (objs[i].tag != "Player")
+            if (objs[i].tag != "Player" && objs[i].tag != "UI" && objs[i].tag != "NotUI" )
             {
                 hits++;
             }
