@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 105734888}
   - component: {fileID: 105734887}
   m_Layer: 5
-  m_Name: SuscSlider
+  m_Name: SuscSlider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 186043282}
   - component: {fileID: 186043281}
   m_Layer: 5
-  m_Name: AuxVal
+  m_Name: AuxVal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1640,8 +1640,6 @@ MonoBehaviour:
   Arrows: []
   field_size: {x: 3, y: 3, z: 2}
   arrow_gap: 0.15
-  radius_of_influence: 0.4
-  max_B_field_value: 0
   Scanner: {fileID: 185685073}
 --- !u!114 &284477317
 MonoBehaviour:
@@ -4020,7 +4018,7 @@ GameObject:
   - component: {fileID: 539078685}
   - component: {fileID: 539078684}
   m_Layer: 5
-  m_Name: SuscVal
+  m_Name: SuscVal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5070,7 +5068,7 @@ GameObject:
   - component: {fileID: 637459827}
   - component: {fileID: 637459826}
   m_Layer: 5
-  m_Name: newAuxVal
+  m_Name: newAuxVal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5361,7 +5359,7 @@ GameObject:
   - component: {fileID: 661513986}
   - component: {fileID: 661513985}
   m_Layer: 5
-  m_Name: newAuxText
+  m_Name: newAuxText2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7145,7 +7143,7 @@ GameObject:
   - component: {fileID: 842460912}
   - component: {fileID: 842460911}
   m_Layer: 5
-  m_Name: SuscText
+  m_Name: SuscText2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10011,7 +10009,7 @@ GameObject:
   - component: {fileID: 1186938959}
   - component: {fileID: 1186938958}
   m_Layer: 5
-  m_Name: AuxSlider
+  m_Name: AuxSlider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11359,7 +11357,7 @@ GameObject:
   - component: {fileID: 1298805381}
   - component: {fileID: 1298805383}
   m_Layer: 5
-  m_Name: NewAuxSlider
+  m_Name: NewAuxSlider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11727,7 +11725,7 @@ GameObject:
   - component: {fileID: 1327748831}
   - component: {fileID: 1327748830}
   m_Layer: 5
-  m_Name: AuxText
+  m_Name: AuxText2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14259,7 +14257,7 @@ GameObject:
   - component: {fileID: 1687319431}
   - component: {fileID: 1687319430}
   m_Layer: 5
-  m_Name: GenerateMagnet
+  m_Name: GenerateMagnet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14391,7 +14389,7 @@ GameObject:
   - component: {fileID: 1700714767}
   - component: {fileID: 1700714766}
   m_Layer: 5
-  m_Name: newSuscText
+  m_Name: newSuscText2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16106,7 +16104,7 @@ GameObject:
   - component: {fileID: 1889338781}
   - component: {fileID: 1889338780}
   m_Layer: 5
-  m_Name: DeleteMagnet
+  m_Name: DeleteMagnet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16921,7 +16919,7 @@ GameObject:
   - component: {fileID: 1977770970}
   - component: {fileID: 1977770969}
   m_Layer: 5
-  m_Name: newSuscVal
+  m_Name: newSuscVal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17057,7 +17055,7 @@ GameObject:
   - component: {fileID: 1984646279}
   - component: {fileID: 1984646281}
   m_Layer: 5
-  m_Name: NewSuscSlider
+  m_Name: NewSuscSlider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

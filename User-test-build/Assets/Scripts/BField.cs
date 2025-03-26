@@ -68,9 +68,12 @@ public class BField : MonoBehaviour
     void Update()
     {
         bool change = false;
+        if (magnets.Count ==0)
+        {
+            change = true;
+        }
         for (int i = 0; i < magnets.Count; i++)
         {
-
             if (magnets[i].MagnetPosition != magnets[i].Magnet.transform.position)
             {
                 change = true;
