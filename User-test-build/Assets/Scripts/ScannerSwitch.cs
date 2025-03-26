@@ -15,6 +15,8 @@ public class scannerswitch : MonoBehaviour
     public GameObject scanner_object;
     public GameObject scanner_sphere;
     public GameObject Controller;
+    public GameObject RayInteractor;
+    public GameObject PokeInteractor;
     // Update is called once per frame
     private bool Scanner = false;
     void Start()
@@ -38,6 +40,8 @@ public class scannerswitch : MonoBehaviour
             ScannerUI.SetActive(true);
             scanner_object.SetActive(true);
             Controller.SetActive(false);
+            RayInteractor.SetActive(false);
+            PokeInteractor.SetActive(false);
         }
         else
         {
@@ -45,6 +49,8 @@ public class scannerswitch : MonoBehaviour
             ScannerUI.SetActive(false);
             scanner_object.SetActive(false);
             Controller.SetActive(true);
+            RayInteractor.SetActive(true);
+            PokeInteractor.SetActive(true);
         }
     }
 
@@ -53,7 +59,8 @@ public class scannerswitch : MonoBehaviour
         if (Scanner)
         {
             Vector3 b_field = bscript.calculate_b_field(scanner_sphere.transform.position);
-            ScannerUI.transform.Find("BFieldMag").GetComponent<TMP_Text>().text = string.Format("{0}", Vector3.Magnitude(b_field));
+            float magvalue = Vector3.Magnitude(b_field);
+            ScannerUI.transform.Find("BFieldMag").GetComponent<TMP_Text>().text = magvalue.ToString("E2");
         }
     }
 }
