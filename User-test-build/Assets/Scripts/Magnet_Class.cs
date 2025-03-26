@@ -111,7 +111,7 @@ namespace Assets.Scripts
         Vector3 closest_arrow = new Vector3(arrow_gap,
                                         arrow_gap,
                                         arrow_gap);
-        return closest_arrow;
+        return MagnetRotation*closest_arrow;
         }
 
         public Vector3 calculate_r(Vector3 position)
