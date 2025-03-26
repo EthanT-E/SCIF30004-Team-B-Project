@@ -19,6 +19,9 @@ namespace Assets.Scripts
         public Vector3 dipole_moment;
         public bool UI_value_change = false;
         public bool holding=false;
+        public Vector3 max_B_field;
+        public float max_B_field_value;
+        public float Radius_of_influence;
         public Magnet_class(GameObject prefab, Vector3 start_pos, Vector3 iAux, float iSus = 1)
         {
             Magnet = Instantiate(prefab);
@@ -105,6 +108,22 @@ namespace Assets.Scripts
                 ChangeTag holding = Magnet.GetComponent<ChangeTag>();
                 holding.not_hovering();
             }
+        }
+
+        public Vector3 closest_arrow(float arrow_gap)
+        {
+        Vector3 closest_arrow = new Vector3(arrow_gap,
+                                        arrow_gap,
+                                        arrow_gap);
+        return MagnetRotation*closest_arrow;
+        }
+
+        public Vector3 calculate_r(Vector3 position)
+        {
+        Vector3 r = new Vector3(Magnet.transform.position.x - position.x,
+                                        Magnet.transform.position.y - position.y,
+                                        Magnet.transform.position.z - position.z);
+        return r;
         }
 
 
