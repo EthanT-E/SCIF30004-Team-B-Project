@@ -263,7 +263,7 @@ public class BField : MonoBehaviour
             
             
 
-            float R1 = calculate_r_magnitude(B_field_factor,costheta_init,magnets.dipole_moment.magnitude)*2f;
+            float R1 = calculate_r_magnitude(B_field_factor,costheta_init,magnets.dipole_moment.magnitude)*1.5f;
             // Debug.Log("max b field: "+magnets[i].max_B_field_value+" close point value:"+close_point+" R1: "+R1);
             magnets.Radius_of_influence = R1;
             return magnets;

@@ -6,7 +6,6 @@ public class MagUI : MonoBehaviour
     BField bscript;
     public Slider auxslider;
     public Slider magslider;
-    public GameObject Mag_UI;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

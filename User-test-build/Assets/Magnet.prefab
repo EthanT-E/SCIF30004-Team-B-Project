@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3413736e-10
       objectReference: {fileID: 0}
@@ -47,6 +59,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4a51f34bd7b905d4f800ed91b446cc54, type: 3}
       propertyPath: m_Name
@@ -358,3 +374,6 @@ MonoBehaviour:
   dipole_moment: {x: 0, y: 0, z: 0}
   UI_value_change: 0
   holding: 0
+  max_B_field: {x: 0, y: 0, z: 0}
+  max_B_field_value: 0
+  Radius_of_influence: 0
