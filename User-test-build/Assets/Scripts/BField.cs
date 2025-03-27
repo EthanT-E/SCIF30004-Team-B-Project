@@ -135,6 +135,7 @@ public class BField : MonoBehaviour
                     Arrows[i].SetActive(false);
                 }
             }
+            // Calculating force and torque exerted on all magnets
             Vector3 force_on_i = Vector3.zero;
             Vector3 torque_on_i = Vector3.zero;
             for (int i = 0; i < magnets.Count; i++)
@@ -151,7 +152,8 @@ public class BField : MonoBehaviour
                 torque_on_i = Calculate_magnetic_torque(magnets[i], calculate_b_field_except_self(magnets[i].MagnetPosition, i));
                 //Debug.Log($"torque on magnet {i} - {torque_on_i.x},{torque_on_i.y},{torque_on_i.z}");
 
-                magnets[i].influence_force(force_on_i);
+                // ith magnet experiences torque and force.
+                magnets[i].influence_force(force_on_i); 
                 magnets[i].influence_torque(torque_on_i);
 
             }
@@ -159,23 +161,40 @@ public class BField : MonoBehaviour
     }
 
 
+    /**
+    /* Calculates Magnetic Torque of magnet.
+    /* Is simply the cross product between magnet own dipole and resultant magnetic field.
+    /* @param[in] magnet - Magnet_class - Magnet_class - Magnet to apply torque to
+    /* @param[in] b_field - Magnet_class - Resultant B-Field to cross product with
+    /* @return Vector3 cross product vector between magnet magnetic dipole and res B field
+    */
     Vector3 Calculate_magnetic_torque(Magnet_class magnet, Vector3 b_field)
     {
         return Vector3.Cross(magnet.dipole_moment, b_field);
     }
 
+    /**
+    /* Calculates force vector between two magnets
+    /* Is dependant on magnet properties encased in Magnet_class
+    /* @param[in] magnet1 - Magnet_class - magnet to calculate force with
+    /* @param[in] magnet2 - Magnet_class - magnet to calculate force with
+    /* @return - Vector3 Force vector between two magnets
+    */
     Vector3 Calculate_force_vector(Magnet_class magnet1, Magnet_class magnet2)
     {
-        Vector3 dist = magnet1.MagnetPosition - magnet2.MagnetPosition;
-        Vector3 dist_norm = dist.normalized;
+        Vector3 dist = magnet1.MagnetPosition - magnet2.MagnetPosition; // distance between two magnets
+        Vector3 dist_norm = dist.normalized; // calculates unit vector
 
+        // store dipole moments
         Vector3 dipole_moment1 = magnet1.dipole_moment;
         Vector3 dipole_moment2 = magnet2.dipole_moment;
 
+        // compute dot products for all quantities needed
         float dip1_dot_dip2 = Vector3.Dot(dipole_moment1, dipole_moment2);
         float distn_dot_dip1 = Vector3.Dot(dist_norm, dipole_moment1);
         float distn_dot_dip2 = Vector3.Dot(dist_norm, dipole_moment2);
 
+        // Compute force between two magnets using big equation.
         Vector3 force = (3 * 1 * dipole_moment1.magnitude * dipole_moment2.magnitude / (4 * Mathf.PI * Mathf.Pow(dist.magnitude, 4))) *
             ((dist_norm * dip1_dot_dip2) + (dipole_moment1 * distn_dot_dip1) + (dipole_moment2 * distn_dot_dip2) - (5 * dist_norm * distn_dot_dip1 * distn_dot_dip2));
 
@@ -199,7 +218,13 @@ public class BField : MonoBehaviour
 
     }
 
-
+    /**
+    /* Calculates resultant magnetic field exerted on magnet dipile
+    /* Only needed to calculate magnetic torque
+    /* @param[in] mag_pos - Vector3 - position vector of magnet
+    /* @param[in] ignore_index - int - index of magnet within the magnet 
+    /* @param[in] Vector3 of resultant magnetic field surrounding excluded magnet
+    */
     Vector3 calculate_b_field_except_self(Vector3 mag_pos, int ignore_index)
     {
         Vector3 resultant_b_field = Vector3.zero;
