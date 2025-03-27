@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts;
+using TMPro;
 public class MagUI : MonoBehaviour
 {
     BField bscript;
     public Slider auxslider;
     public Slider magslider;
+
+    public TextMeshProUGUI auxsliderText;
+    public TextMeshProUGUI magsliderText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +20,8 @@ public class MagUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        auxsliderText.text = auxslider.value.ToString();
+        magsliderText.text = magslider.value.ToString();
         for(int i = 0; i < bscript.magnets.Count; i++)
         {
             if (bscript.magnets[i].Magnet.tag=="UI")

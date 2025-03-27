@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts;
+using TMPro;
 public class GenerateMagnet : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     BField bscript;
     public GameObject magnetPrefab;
     public Slider auxslider;
+    public TextMeshProUGUI auxsliderText;
+    public TextMeshProUGUI magsliderText;
     public Slider magslider;
     private Vector3 pos;
     void Start()
@@ -18,6 +21,8 @@ public class GenerateMagnet : MonoBehaviour
 
     void Update()
     {
+        auxsliderText.text = auxslider.value.ToString();
+        magsliderText.text = magslider.value.ToString();
     }
 
 

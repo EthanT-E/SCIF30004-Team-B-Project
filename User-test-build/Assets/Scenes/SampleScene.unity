@@ -265,7 +265,6 @@ GameObject:
   m_Component:
   - component: {fileID: 105734886}
   - component: {fileID: 105734888}
-  - component: {fileID: 105734887}
   m_Layer: 5
   m_Name: SuscSlider2
   m_TagString: Untagged
@@ -295,20 +294,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 71}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &105734887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105734885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 105734888}
-  sliderText: {fileID: 539078684}
 --- !u!114 &105734888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1647,6 @@ GameObject:
   m_Component:
   - component: {fileID: 290726396}
   - component: {fileID: 290726394}
-  - component: {fileID: 290726395}
   m_Layer: 5
   m_Name: NewSuscSlider
   m_TagString: Untagged
@@ -1721,20 +1705,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &290726395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290726393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 290726394}
-  sliderText: {fileID: 718546350}
 --- !u!224 &290726396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2655,7 +2625,6 @@ GameObject:
   m_Component:
   - component: {fileID: 387152654}
   - component: {fileID: 387152656}
-  - component: {fileID: 387152655}
   m_Layer: 5
   m_Name: AuxSlider
   m_TagString: Untagged
@@ -2685,20 +2654,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: -146}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &387152655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387152653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 387152656}
-  sliderText: {fileID: 734477845}
 --- !u!114 &387152656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6919,7 +6874,6 @@ GameObject:
   m_Component:
   - component: {fileID: 827326240}
   - component: {fileID: 827326238}
-  - component: {fileID: 827326239}
   m_Layer: 5
   m_Name: NewAuxSlider
   m_TagString: Untagged
@@ -6978,20 +6932,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &827326239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827326237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 827326238}
-  sliderText: {fileID: 354723918}
 --- !u!224 &827326240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9975,7 +9915,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1186938957}
   - component: {fileID: 1186938959}
-  - component: {fileID: 1186938958}
   m_Layer: 5
   m_Name: AuxSlider2
   m_TagString: Untagged
@@ -10005,20 +9944,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: -146}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1186938958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186938956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1186938959}
-  sliderText: {fileID: 186043281}
 --- !u!114 &1186938959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11323,7 +11248,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1298805382}
   - component: {fileID: 1298805381}
-  - component: {fileID: 1298805383}
   m_Layer: 5
   m_Name: NewAuxSlider2
   m_TagString: Untagged
@@ -11404,20 +11328,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1.1389695, y: -74}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1298805383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298805380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1298805381}
-  sliderText: {fileID: 637459826}
 --- !u!1 &1320207299
 GameObject:
   m_ObjectHideFlags: 0
@@ -11880,6 +11790,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetPrefab: {fileID: 8798230830766133253, guid: 82c435fba413841468d2475f2b7d6ca0, type: 3}
   auxslider: {fileID: 827326238}
+  auxsliderText: {fileID: 354723918}
+  magsliderText: {fileID: 718546350}
   magslider: {fileID: 290726394}
 --- !u!114 &1341841968
 MonoBehaviour:
@@ -12279,6 +12191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetPrefab: {fileID: 8798230830766133253, guid: 82c435fba413841468d2475f2b7d6ca0, type: 3}
   auxslider: {fileID: 1298805381}
+  auxsliderText: {fileID: 637459826}
+  magsliderText: {fileID: 1977770969}
   magslider: {fileID: 1984646279}
 --- !u!114 &1420793966
 MonoBehaviour:
@@ -12785,6 +12699,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   auxslider: {fileID: 387152656}
   magslider: {fileID: 1998460502}
+  auxsliderText: {fileID: 734477845}
+  magsliderText: {fileID: 711454160}
 --- !u!1 &1536117054
 GameObject:
   m_ObjectHideFlags: 0
@@ -15932,6 +15848,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   auxslider: {fileID: 1186938959}
   magslider: {fileID: 105734888}
+  auxsliderText: {fileID: 186043281}
+  magsliderText: {fileID: 539078684}
 --- !u!1 &1851812651
 GameObject:
   m_ObjectHideFlags: 0
@@ -17051,7 +16969,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1984646280}
   - component: {fileID: 1984646279}
-  - component: {fileID: 1984646281}
   m_Layer: 5
   m_Name: NewSuscSlider2
   m_TagString: Untagged
@@ -17132,20 +17049,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: 143}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1984646281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984646278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1984646279}
-  sliderText: {fileID: 1977770969}
 --- !u!1 &1998460499
 GameObject:
   m_ObjectHideFlags: 0
@@ -17155,8 +17058,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998460500}
-  - component: {fileID: 1998460502}
   - component: {fileID: 1998460501}
+  - component: {fileID: 1998460502}
   m_Layer: 5
   m_Name: SuscSlider
   m_TagString: Untagged
