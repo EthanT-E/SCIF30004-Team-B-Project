@@ -64,7 +64,7 @@ public class BField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool change = false;
+        bool change = false; //checks for any change to UI or magnets
         if (magnets.Count ==0)
         {
             change = true;
@@ -87,7 +87,7 @@ public class BField : MonoBehaviour
                 magnets[i].update_dipole();
             }
         }
-        if (change)
+        if (change) //updates bfield and arrows if there has been a change
         {
             for (int i = 0; i < Arrows.Count; i++)
             {
