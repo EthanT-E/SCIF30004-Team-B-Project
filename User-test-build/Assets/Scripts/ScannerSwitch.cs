@@ -21,23 +21,23 @@ public class scannerswitch : MonoBehaviour
     private bool Scanner = false;
     void Start()
     {
-        bscript = GameObject.Find("System").GetComponent<BField>();
+        bscript = GameObject.Find("System").GetComponent<BField>(); //accesses b field calculation
     }
     void Update()
     {
-        button.action.started += switch_layer;
+        button.action.started += switch_layer; //if secondary button pressed then switch_layer function called
         
-        trigger.action.started += calc_Bfield;
+        trigger.action.started += calc_Bfield; //if trigger is pressed then calculates bfield
         
     }
 
     void switch_layer(InputAction.CallbackContext context)
     {
-        Scanner = !Scanner;
+        Scanner = !Scanner; //toggles between scanner device and controller
         if (Scanner)
         {
-            interactor.interactionLayers = scanner_layer;
-            ScannerUI.SetActive(true);
+            interactor.interactionLayers = scanner_layer; //changes to scanner interaction layer
+            ScannerUI.SetActive(true); //disables and enables relevant controller objects
             scanner_object.SetActive(true);
             Controller.SetActive(false);
             RayInteractor.SetActive(false);
@@ -45,7 +45,7 @@ public class scannerswitch : MonoBehaviour
         }
         else
         {
-            interactor.interactionLayers = mag_layer;
+            interactor.interactionLayers = mag_layer; //changes to magnet interaction layer
             ScannerUI.SetActive(false);
             scanner_object.SetActive(false);
             Controller.SetActive(true);
@@ -56,7 +56,7 @@ public class scannerswitch : MonoBehaviour
 
     void calc_Bfield(InputAction.CallbackContext context)
     {
-        if (Scanner)
+        if (Scanner) //if in scanner layer and the trigger is pressed recalculates bfield and outputs magnitude to the UI
         {
             Vector3 b_field = bscript.calculate_b_field(scanner_sphere.transform.position);
             float magvalue = Vector3.Magnitude(b_field);
