@@ -118,7 +118,7 @@ public class BField : MonoBehaviour
                     {
                         colorscale = 1f;
                     }
-                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1, 1 - colorscale, 0, colorscale);
+                    Arrows[i].GetComponent<MeshRenderer>().material.color = new Color(1, 1 - colorscale, 0, colorscale);//change the color of magnet depends on the colorscale
                 }
                 else
                 {
