@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit.AR;
 using Unity.VisualScripting;
 using Assets.Scripts;
 
+// This class was required to send information to the system GameObject
 public class RecieveAndSendToSystem : MonoBehaviour
 {
     public GameObject magnet_held;
@@ -14,16 +15,22 @@ public class RecieveAndSendToSystem : MonoBehaviour
     private InteractorHandedness which_hand;
     private MagneticVibration system;
 
+    // Gets controller Object, handedness attribute from self NearFarInteractor and system
     void Start()
     {
         NearFarInteractor controller = this.GetComponent<NearFarInteractor>();
         which_hand = controller.handedness;
-
-        system = sample_system.GetComponent<MagneticVibration>();
+        
+        system = sample_system.GetComponent<MagneticVibration>(); // For MagnetVibration component
     }
 
+    /**
+    /* obtains magnet sent from Magnet_class and sens to system's MagnetVibration component
+    /* @param[in] magnet - Magnet_class - magnet to send
+    */
     public void get_magnet(Magnet_class magnet)
     {
+        // Checking if controller hand is either left or right (it's a InteractorHandedness object)
         if (which_hand == InteractorHandedness.Left)
         {
             system.set_left_magnet(magnet);
