@@ -67,7 +67,7 @@ namespace Assets.Scripts
             MagnetRotation = Magnet.transform.rotation;
         }
         
-        public void update_dipole()
+        public void update_dipole() //updates dipole for magnet rotation
         {
             dipole_moment = Dipole_moment();
             dipole_moment =  MagnetRotation*dipole_moment;
