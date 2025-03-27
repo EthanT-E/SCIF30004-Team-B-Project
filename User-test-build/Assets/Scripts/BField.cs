@@ -36,7 +36,7 @@ public class BField : MonoBehaviour
             for (int j = 0; j < magnets.Count; j++)
             {
                 float distance = Vector3.Distance(magnets[j].MagnetPosition, arrow_position);
-                if ((distance < magnets[j].Radius_of_influence) && (distance > min_radius_of_influence))
+                if ((distance < magnets[j].Radius_of_influence) && (distance > min_radius_of_influence))//check whther the arrow is within the radius of influence
                 {
                     active = true;
                     break;
