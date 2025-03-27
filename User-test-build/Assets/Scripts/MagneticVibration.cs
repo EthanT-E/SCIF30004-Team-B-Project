@@ -6,16 +6,20 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using TMPro;
 using Assets.Scripts;
+
 public class MagneticVibration : MonoBehaviour
 {
-
+    // Store left controller and right controller used in game (only tested on Quest 2)
     public InputDevice leftController;
     public InputDevice rightController;
 
+    // store Magnet_class instances for held magnets
     private Magnet_class leftMagnet;
     private Magnet_class rightMagnet;
 
-    public TextMeshProUGUI textmesh;
+    public TextMeshProUGUI textmesh; // for displaying force - only was for debugging
+
+    // Stores information about left and right controllers
     void Start()
     {
         leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
@@ -25,22 +29,35 @@ public class MagneticVibration : MonoBehaviour
 
     void Update()
     {
-        textmesh.text = $"Left Magnet: {leftMagnet}, Right Magnet: {rightMagnet}";
+        textmesh.text = $"Left Magnet: {leftMagnet}, Right Magnet: {rightMagnet}"; //sets text to be what is held
+        
+        // DO NOT APPLY HAPTIC IMPULSE IF BOTH HANDS ARE NOT HOLDING MAGNET
         if (leftMagnet == null || rightMagnet == null)
         {
             leftController.SendHapticImpulse(0, 0, 0.1f);
             rightController.SendHapticImpulse(0, 0, 0.1f);
         }
+        
         else
         {
             Debug.Log(Calculate_force(leftMagnet, rightMagnet));
             textmesh.text = $"Magnetic FOrce {Calculate_force(leftMagnet, rightMagnet)} N";
-            float clampedForce = Mathf.Clamp(Calculate_force(leftMagnet, rightMagnet)/10000.0f, 400.0f, 2000.0f);
-            float intensity = Mathf.InverseLerp(400.0f, 2000.0f, clampedForce);
+            float clampedForce = Mathf.Clamp(Calculate_force(leftMagnet, rightMagnet)/10000.0f, 400.0f, 2000.0f); // RESTRICT FORCE SO IT'S NOT TOO STRONG
+            float intensity = Mathf.InverseLerp(400.0f, 2000.0f, clampedForce); // Normalise force to be between ranges
+
+            // Apply haptic feedback (vibration) to controllers
             leftController.SendHapticImpulse(0, intensity, 0.1f);
             rightController.SendHapticImpulse(0, intensity, 0.1f);
         }
     }
+
+    /**
+    /* Calculates force vector between two magnets
+    /* Is dependant on magnet properties encased in Magnet_class
+    /* @param[in] magnet1 - Magnet_class - magnet to calculate force with
+    /* @param[in] magnet2 - Magnet_class - magnet to calculate force with
+    /* @return - float of Force vector between two magnets - only need to return magnitude
+    */
     float Calculate_force(Magnet_class magnet1, Magnet_class magnet2)
     {
         Vector3 dist = magnet1.MagnetPosition - magnet2.MagnetPosition;
@@ -59,11 +76,13 @@ public class MagneticVibration : MonoBehaviour
         return force.magnitude;
     }
 
+    // assigns leftMagnet to be what was sent
     public void set_left_magnet(Magnet_class magnet)
     {
         leftMagnet = magnet;
     }
 
+    // assigns righttMagnet to be what was sent
     public void set_right_magnet(Magnet_class magnet)
     {
         rightMagnet = magnet;
