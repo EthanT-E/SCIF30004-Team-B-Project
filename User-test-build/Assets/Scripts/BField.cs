@@ -21,9 +21,6 @@ public class BField : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2, 1, 0), new Vector3(0, 0, 5), 5); // generates the magnets
-        // Magnet_class.Generate_magnet(magnetPrefab, magnets, new Vector3(-2.2f, 1, 0), new Vector3(0, 0, 5), 5);
-
         generate_field(field_size, arrow_gap, Arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap / 2;
         for (int i = 0; i < magnets.Count; i++)
@@ -88,9 +85,6 @@ public class BField : MonoBehaviour
                 change = true;
                 magnets[i].new_rot();
                 magnets[i].update_dipole();
-
-                
-
             }
         }
         if (change)
@@ -112,18 +106,14 @@ public class BField : MonoBehaviour
                         active = true;
                         break;
                     }
-
-
                 }
                 if (active)
                 {
                     Vector3 b_field = calculate_b_field(arrow_position);
                     Arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range 
-                    Arrows[i].SetActive(true);
+                    Arrows[i].SetActive(true); //Enable arrow rendering and interactability
                     
                     float colorscale = b_field.magnitude / MAX_B;
-                    // Debug.Log("magnitude_1: "+b_field_value+"   magnitude_2: "+b_field.magnitude+"  max_b_field"+magnets[0].max_B_field_value);
-                    // Debug.Log(b_field.magnitude);
                     if (colorscale > 1)
                     {
                         colorscale = 1f;
@@ -132,7 +122,7 @@ public class BField : MonoBehaviour
                 }
                 else
                 {
-                    Arrows[i].SetActive(false);
+                    Arrows[i].SetActive(false); //Disable arrow rendering and interactability
                 }
             }
             // Calculating force and torque exerted on all magnets
@@ -147,15 +137,12 @@ public class BField : MonoBehaviour
                 {
                     if (i != j)
                         force_on_i += Calculate_force_vector(magnets[i], magnets[j]);
-
                 }
                 torque_on_i = Calculate_magnetic_torque(magnets[i], calculate_b_field_except_self(magnets[i].MagnetPosition, i));
-                //Debug.Log($"torque on magnet {i} - {torque_on_i.x},{torque_on_i.y},{torque_on_i.z}");
 
                 // ith magnet experiences torque and force.
                 magnets[i].influence_force(force_on_i); 
                 magnets[i].influence_torque(torque_on_i);
-
             }
         }
     }
@@ -175,7 +162,7 @@ public class BField : MonoBehaviour
 
     /**
     /* Calculates force vector between two magnets
-    /* Is dependant on magnet properties encased in Magnet_class
+    /* Is dependent on magnet properties encased in Magnet_class
     /* @param[in] magnet1 - Magnet_class - magnet to calculate force with
     /* @param[in] magnet2 - Magnet_class - magnet to calculate force with
     /* @return - Vector3 Force vector between two magnets
@@ -201,6 +188,10 @@ public class BField : MonoBehaviour
         return force;
     }
 
+    /**
+    /* Calculates resultant magnetic field at position
+    /* @param[in] arrow_pos - Vector3 - position vector to calculate at
+    */
     public Vector3 calculate_b_field(Vector3 arrow_pos)
     {
         Vector3 resultant_b_field = Vector3.zero;
@@ -209,13 +200,13 @@ public class BField : MonoBehaviour
             Vector3 vector_distance = new Vector3(arrow_pos.x - magnets[i].MagnetPosition.x,
                                                   arrow_pos.y - magnets[i].MagnetPosition.y,
                                                   arrow_pos.z - magnets[i].MagnetPosition.z).normalized;
+            //equation:        ~(μ₀/4π)·(                                         m·r                                )×r - m 
+            //                                                                  / |r|³
             resultant_b_field += 1e-7f * (3 * (Vector3.Dot(magnets[i].dipole_moment, vector_distance)) * vector_distance - magnets[i].dipole_moment)
                                             / Mathf.Pow(Vector3.Distance(magnets[i].MagnetPosition, arrow_pos), 3);
-
         }
 
         return resultant_b_field;
-
     }
 
     /**
@@ -293,6 +284,13 @@ public class BField : MonoBehaviour
             magnets.Radius_of_influence = R1;
             return magnets;
     }
+
+    /**
+    /* Scans magnetic field at arrow
+    /* Currently unused previous implementation of the scanner
+       see generate_field for how to set the arrows to use this function when selected by the near-far interactor
+    /* @param[in] args - SelectEnterEventArgs - argument handled/provided by Unity's event system, ignore at the programmers' end
+    */
     void scan(SelectEnterEventArgs args)
     {
         Vector3 b_field = calculate_b_field(args.interactableObject.transform.position);

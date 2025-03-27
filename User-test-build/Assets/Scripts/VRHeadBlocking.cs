@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//See https://metaanomie.blogspot.com/2020/04/unity-vr-head-blocking-steam-vr-v2.html for more information
 public class VRHeadBlocking : MonoBehaviour
 {
     public GameObject player;
@@ -19,12 +20,17 @@ public class VRHeadBlocking : MonoBehaviour
         prevHeadPos = transform.position;
     }
 
+    /**
+    /* Detects whether the collider at the camera has hit anything
+    /* @param[in] loc - Vector3 - position vector of camera
+    */
     private int DetectHit(Vector3 loc)
     {
         int hits = 0;
         int size = Physics.OverlapSphereNonAlloc(loc, backupCap, objs, layerMask, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < size; i++)
         {
+            //Make sure anything in the VR rig that could collide with the camera is set to use tag Player
             if (objs[i].tag != "Player" && objs[i].tag != "UI" && objs[i].tag != "NotUI" )
             {
                 hits++;
