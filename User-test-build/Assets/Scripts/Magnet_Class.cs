@@ -73,13 +73,24 @@ namespace Assets.Scripts
             dipole_moment =  MagnetRotation*dipole_moment;
         }
 
+        /**
+        /* Applies force onto itself
+        /* @param[in] force - Vector3 - Force vector to exert onto self
+        */
         public void influence_force(Vector3 force)
         {
+            // Magnetic force was typiclly too strong. Introduced damping terms to prevent extreme chaos
             float scale_factor = 1.0f - Mathf.Exp(-force.magnitude / 1E10f);
             float adjust_magnitude = Mathf.Pow(force.magnitude, 0.65f);
+
+            // Applies force onto self
             Magnet.GetComponent<Rigidbody>().AddForce(force.normalized * scale_factor * adjust_magnitude, ForceMode.Acceleration);
         }
 
+        /**
+        /* Applies torque onto itself
+        /* @param[in] torque - Vector3 - Torque vector to exert onto self
+        */
         public void influence_torque(Vector3 torque)
         {
             Magnet.GetComponent<Rigidbody>().AddTorque(torque.normalized * Mathf.Clamp(torque.magnitude, 0.0f, 1E5f), ForceMode.Acceleration);
@@ -98,13 +109,18 @@ namespace Assets.Scripts
             Magnet_list.Add(mag);
         }
 
+
+        /**
+        /* Sends instance of itself to reciever component for later processing of MagneticVibration.cs
+        /* @param[in] args - SelectEnterEventArgs - argument for GameObject that has grabbed magnet
+        */
         public void Send_Self(SelectEnterEventArgs args)
         {
-            if (args.interactorObject is NearFarInteractor controller)
+            if (args.interactorObject is NearFarInteractor controller) // Checks to make sure controller has grabbed self
             {
-                RecieveAndSendToSystem reciever = controller.GetComponent<RecieveAndSendToSystem>();
+                RecieveAndSendToSystem reciever = controller.GetComponent<RecieveAndSendToSystem>(); // Store reciever component of controller
                 Debug.Log($"DIpoe: {this.GetComponent<Magnet_class>().dipole_moment.x},{this.GetComponent<Magnet_class>().dipole_moment.y},{this.GetComponent<Magnet_class>().dipole_moment.z}");
-                reciever.get_magnet(this.GetComponent<Magnet_class>());
+                reciever.get_magnet(this.GetComponent<Magnet_class>()); // RecieveAndSendToSystem object Gets Magnet_class instance of self 
                 ChangeTag holding = Magnet.GetComponent<ChangeTag>();
                 holding.not_hovering();
             }
@@ -126,13 +142,16 @@ namespace Assets.Scripts
         return r;
         }
 
-
+        /**
+        /* Sends instance nullreciever component for later processing of MagneticVibration.cs
+        /* @param[in] args - SelectEnterEventArgs - argument for GameObject that has dropped magnet
+        */
         public void unsend_Self(SelectExitEventArgs args)
         {
             if (args.interactorObject is NearFarInteractor controller)
             {
-                RecieveAndSendToSystem reciever = controller.GetComponent<RecieveAndSendToSystem>();
-                reciever.get_magnet(null);
+                RecieveAndSendToSystem reciever = controller.GetComponent<RecieveAndSendToSystem>(); // Store reciever component of controller
+                reciever.get_magnet(null); // RecieveAndSendToSystem object gets null
                 ChangeTag holding = Magnet.GetComponent<ChangeTag>();
                 holding.not_hovering();
             }
