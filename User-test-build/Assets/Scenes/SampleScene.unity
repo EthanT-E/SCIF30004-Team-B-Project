@@ -1621,7 +1621,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 6474583027956322311, guid: 7196c378f90a818449dc9d1f7eb771f3, type: 3}
   min_radius_of_influence: 0
   Arrows: []
-  field_size: {x: 3, y: 3, z: 2}
+  field_size: {x: 3.5, y: 3.6, z: 2}
   arrow_gap: 0.13
   Scanner: {fileID: 185685073}
 --- !u!114 &284477317
@@ -17101,8 +17101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c7dbc420cb8b245bfc6a2c48426ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1998460502}
-  sliderText: {fileID: 711454160}
 --- !u!114 &1998460502
 MonoBehaviour:
   m_ObjectHideFlags: 0

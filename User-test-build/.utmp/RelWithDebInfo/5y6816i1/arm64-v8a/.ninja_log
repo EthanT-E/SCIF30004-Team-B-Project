@@ -1,10 +1,10 @@
 # ninja log v5
-69	2782	7647964872288287	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	bc0dc212641e013d
-25	2847	7647964873114802	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	7cae8c60ee60fec3
-126	2929	7647964873841801	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	50256c10160097b4
-96	3111	7647964875441667	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	5bdf148fca702d5f
-45	3155	7647964876028756	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	4c12ae817bf8c962
-14	3226	7647964876996640	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	ff6a30ffa67f198e
-58	3591	7647964880488399	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	1c9de24cd0d78056
-1	3767	7647964882241093	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	510a39124cfc0b53
-3769	4041	7647964885212053	C:/Users/adamj/Documents/sidequesttest/SCIF30004-Team-B-Project/User-test-build/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5y6816i1/obj/arm64-v8a/libgame.so	f654439a33199b13
+25	1230	7648650543000198	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	bc0dc212641e013d
+9	1258	7648650543271473	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	7cae8c60ee60fec3
+44	1264	7648650543367789	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	50256c10160097b4
+37	1330	7648650544007629	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	5bdf148fca702d5f
+31	1356	7648650544293600	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	4c12ae817bf8c962
+14	1381	7648650544540171	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	ff6a30ffa67f198e
+19	1508	7648650545809455	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	1c9de24cd0d78056
+1	1606	7648650546801415	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	510a39124cfc0b53
+1607	1774	7648650548512589	C:/Users/adamj/Documents/sidequesttest/SCIF30004-Team-B-Project/User-test-build/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5y6816i1/obj/arm64-v8a/libgame.so	f654439a33199b13
