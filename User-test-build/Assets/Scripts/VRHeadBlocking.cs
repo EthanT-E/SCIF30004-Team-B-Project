@@ -7,17 +7,17 @@ public class VRHeadBlocking : MonoBehaviour
 {
     public GameObject player;
 
-    private int layerMask;
+    private int layer_mask;
     private Collider[] objs = new Collider[10];
-    private Vector3 prevHeadPos;
+    private Vector3 prev_head_pos;
     private float backupCap = .2f;
 
     private void Start()
     {
-        layerMask = 1 << 8;
-        layerMask = ~layerMask;
+        layer_mask = 1 << 8;
+        layer_mask = ~layer_mask;
 
-        prevHeadPos = transform.position;
+        prev_head_pos = transform.position;
     }
 
     /**
@@ -27,7 +27,7 @@ public class VRHeadBlocking : MonoBehaviour
     private int DetectHit(Vector3 loc)
     {
         int hits = 0;
-        int size = Physics.OverlapSphereNonAlloc(loc, backupCap, objs, layerMask, QueryTriggerInteraction.Ignore);
+        int size = Physics.OverlapSphereNonAlloc(loc, backupCap, objs, layer_mask, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < size; i++)
         {
             //Make sure anything in the VR rig that could collide with the camera is set to use tag Player
@@ -47,13 +47,13 @@ public class VRHeadBlocking : MonoBehaviour
             int hits = DetectHit(transform.position);
 
             // No collision
-            if (hits == 0) prevHeadPos = transform.position;
+            if (hits == 0) prev_head_pos = transform.position;
 
             // Collision
             else
             {
                 // Player pushback
-                Vector3 headDiff = transform.position - prevHeadPos;
+                Vector3 headDiff = transform.position - prev_head_pos;
                 if (Mathf.Abs(headDiff.x) > backupCap)
                 {
                     if (headDiff.x > 0) headDiff.x = backupCap;

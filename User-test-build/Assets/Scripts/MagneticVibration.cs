@@ -13,9 +13,9 @@ public class MagneticVibration : MonoBehaviour
     public InputDevice leftController;
     public InputDevice rightController;
 
-    // store Magnet_class instances for held magnets
-    private Magnet_class leftMagnet;
-    private Magnet_class rightMagnet;
+    // store MagnetClass instances for held magnets
+    private MagnetClass leftMagnet;
+    private MagnetClass rightMagnet;
 
     public TextMeshProUGUI textmesh; // for displaying force - only was for debugging
 
@@ -53,14 +53,14 @@ public class MagneticVibration : MonoBehaviour
 
     /**
     /* Calculates force vector between two magnets
-    /* Is dependant on magnet properties encased in Magnet_class
-    /* @param[in] magnet1 - Magnet_class - magnet to calculate force with
-    /* @param[in] magnet2 - Magnet_class - magnet to calculate force with
+    /* Is dependant on magnet properties encased in MagnetClass
+    /* @param[in] magnet1 - MagnetClass - magnet to calculate force with
+    /* @param[in] magnet2 - MagnetClass - magnet to calculate force with
     /* @return - float of Force vector between two magnets - only need to return magnitude
     */
-    float Calculate_force(Magnet_class magnet1, Magnet_class magnet2)
+    float Calculate_force(MagnetClass magnet1, MagnetClass magnet2)
     {
-        Vector3 dist = magnet1.MagnetPosition - magnet2.MagnetPosition;
+        Vector3 dist = magnet1.magnet_position - magnet2.magnet_position;
         Vector3 dist_norm = dist.normalized;
 
         Vector3 dipole_moment1 = magnet1.dipole_moment;
@@ -77,13 +77,13 @@ public class MagneticVibration : MonoBehaviour
     }
 
     // assigns leftMagnet to be what was sent
-    public void set_left_magnet(Magnet_class magnet)
+    public void set_left_magnet(MagnetClass magnet)
     {
         leftMagnet = magnet;
     }
 
     // assigns righttMagnet to be what was sent
-    public void set_right_magnet(Magnet_class magnet)
+    public void set_right_magnet(MagnetClass magnet)
     {
         rightMagnet = magnet;
     }

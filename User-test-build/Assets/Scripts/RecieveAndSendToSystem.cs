@@ -25,10 +25,10 @@ public class RecieveAndSendToSystem : MonoBehaviour
     }
 
     /**
-    /* obtains magnet sent from Magnet_class and sens to system's MagnetVibration component
-    /* @param[in] magnet - Magnet_class - magnet to send
+    /* obtains magnet sent from MagnetClass and sens to system's MagnetVibration component
+    /* @param[in] magnet - MagnetClass - magnet to send
     */
-    public void get_magnet(Magnet_class magnet)
+    public void get_magnet(MagnetClass magnet)
     {
         // Checking if controller hand is either left or right (it's a InteractorHandedness object)
         if (which_hand == InteractorHandedness.Left)
