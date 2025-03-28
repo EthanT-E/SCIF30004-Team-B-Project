@@ -13,7 +13,7 @@ public class BField : MonoBehaviour
     public GameObject arrowPrefab;
     public float min_radius_of_influence;
     public List<GameObject> arrows = new List<GameObject>();
-    public Vector3 field_size = new Vector3(3.5f, 3.6f, 2);
+    public Vector3 field_size = new Vector3(3, 3, 2);
     public float arrow_gap = 0.13f;
     public GameObject Scanner;
 

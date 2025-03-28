@@ -1,4 +1,4 @@
-Library: C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+Library: C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --platform=Android
 --backend=burst-llvm-16
 --target=ARMV8A_AARCH64
@@ -8,10 +8,10 @@ Library: C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\B
 --float-precision=Standard
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\Burst
+--temp-folder=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.36f1/Editor/Data/PlaybackEngines/AndroidPlayer
---decode-folder=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Library\Burst
---output=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+--decode-folder=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Library\Burst
+--output=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Jobs.IJobExtensions+JobStruct`1[[UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Jobs.Float4TweenJob, Unity.XR.Interaction.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Jobs.Float4TweenJob&, Unity.XR.Interaction.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--34aec427743d7d01c0cb7a219c9fbe32
@@ -76,10 +76,10 @@ Library: C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\B
 --target-framework=NetFramework
 --float-mode=Fast
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\Burst
+--temp-folder=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.36f1/Editor/Data/PlaybackEngines/AndroidPlayer
---decode-folder=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Library\Burst
---output=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+--decode-folder=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Library\Burst
+--output=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ZBinningJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ZBinningJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--77fc393cb521ac129b1392d4eb94d29a
@@ -93,10 +93,10 @@ Library: C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\B
 --float-precision=Standard
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\Burst
+--temp-folder=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.36f1/Editor/Data/PlaybackEngines/AndroidPlayer
---decode-folder=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Library\Burst
---output=C:\Users\tripp\Vr local\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
+--decode-folder=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Library\Burst
+--output=C:\Users\adamj\Documents\complete\SCIF30004-Team-B-Project\User-test-build\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
