@@ -26,7 +26,7 @@ public class BField : MonoBehaviour
         for (int i = 0; i < magnets.Count; i++)
         {
             magnets[i].new_pos();
-            magnets[i] = radius(magnets[i],arrow_gap,20);//initialize the radius of influence and maximum B field value
+            magnets[i] = radius(magnets[i],arrow_gap,18);//initialize the radius of influence and maximum B field value
         }
 
         for (int i = 0; i < arrows.Count; i++) //iterates through all arrows
@@ -89,6 +89,12 @@ public class BField : MonoBehaviour
         }
         if (change) //updates bfield and arrows if there has been a change
         {
+            for (int j = 0; j < magnets.Count; j++){
+                magnets[j] = radius(magnets[j],arrow_gap,18);//updating the radius of influence
+                if (magnets[j].max_B_field_value>max_b){
+                    max_b = magnets[j].max_B_field_value;//finding the maximum B field value amoung all magnets
+                }
+            }
             for (int i = 0; i < arrows.Count; i++)
             {
                 Vector3 arrow_position = arrows[i].transform.position;
@@ -246,7 +252,7 @@ public class BField : MonoBehaviour
     }
     float calculate_r_magnitude(float B,float costheta,float m)//funciton for calculating the corresponding distance at certain value of B field
     {
-        return Mathf.Pow(1e-7f*m*Mathf.Sqrt(1+3*Mathf.Pow(costheta,2)/B),1f/3f);
+        return Mathf.Pow(1e-7f*m*Mathf.Sqrt(1+3*Mathf.Pow(costheta,2))/B,1f/3f);
     }
 
 
@@ -271,17 +277,17 @@ public class BField : MonoBehaviour
     
     MagnetClass radius(MagnetClass magnets, float arrow_gap, int radius_factor)//finding the maximum B-field value and using it to find a radius of influence for each magnet
     {
-            Vector3 close_point = magnets.closest_arrow(arrow_gap);//get the position of a point that is close to the magnet
+            Vector3 close_point = magnets.closest_arrow(arrow_gap/1.5f);//get the position of a point that is close to the magnet
             float costheta_init = calculate_costheta(close_point,magnets.dipole_moment);//calculating cos(theta) for calculation
             magnets.max_B_field_value = calculate_b_field_magnitude(close_point.magnitude,costheta_init,magnets.dipole_moment.magnitude);//finding the maximum B-field value
-            float B_field_factor = magnets.max_B_field_value/Mathf.Pow(radius_factor,3);
-            
+            float B_field_factor = magnets.max_B_field_value/(radius_factor*(magnets.dipole_moment.magnitude/120));//determing a minimum Bfield value
             
 
-            float r1 = calculate_r_magnitude(B_field_factor,costheta_init,magnets.dipole_moment.magnitude)*1.5f;//calculate the radius of influence
+            float r1 = calculate_r_magnitude(B_field_factor,costheta_init,magnets.dipole_moment.magnitude);//calculate the radius of influence
             magnets.radius_of_influence = r1;//change the radius of influence for each magnet
             return magnets;
     }
+
 
     /**
     /* Scans magnetic field at arrow
