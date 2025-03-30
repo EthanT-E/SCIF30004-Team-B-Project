@@ -25,9 +25,6 @@ public class BField : MonoBehaviour
         min_radius_of_influence = arrow_gap / 2;
     }
 
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -228,6 +225,7 @@ public class BField : MonoBehaviour
                     // XRSimpleInteractable scanInteractor = Scanner.GetComponent("XRSimpleInteractable") as XRSimpleInteractable;
                     // scanInteractor.selectEntered.AddListener(scan);
                     arrows.Add(arrow); //Adds arrow to list of arrows
+                    arrow.SetActive(false);
                 }
             }
         }
