@@ -13,7 +13,7 @@ public class BField : MonoBehaviour
     public GameObject arrowPrefab;
     public float min_radius_of_influence;
     public List<GameObject> arrows = new List<GameObject>();
-    public Vector3 field_size = new Vector3(3, 3, 2);
+    public Vector3 field_size = new Vector3(3.6f, 3.6f, 2);
     public float arrow_gap = 0.13f;
     public GameObject Scanner;
 
@@ -23,39 +23,6 @@ public class BField : MonoBehaviour
     {
         generate_field(field_size, arrow_gap, arrows); //generates the field of arrows
         min_radius_of_influence = arrow_gap / 2;
-        for (int i = 0; i < magnets.Count; i++)
-        {
-            magnets[i].new_pos();
-            magnets[i] = radius(magnets[i],arrow_gap,18);//initialize the radius of influence and maximum B field value
-        }
-
-        for (int i = 0; i < arrows.Count; i++) //iterates through all arrows
-        {
-            Vector3 arrow_position = arrows[i].transform.position;
-            bool active = false;
-            for (int j = 0; j < magnets.Count; j++)
-            {
-                float distance = Vector3.Distance(magnets[j].magnet_position, arrow_position);
-                if ((distance < magnets[j].radius_of_influence) && (distance > min_radius_of_influence))//check whther the arrow is within the radius of influence
-                {
-                    active = true;
-                    break;
-                }
-            }
-            if (active)
-            {
-                Vector3 b_field = calculate_b_field(arrow_position);
-
-                arrows[i].transform.rotation = Quaternion.LookRotation(b_field); // gets arrow to point in b direction. increase the coeffeient also increases the effective range
-                arrows[i].SetActive(true);
-
-            }
-            else
-            {
-                arrows[i].SetActive(false);
-            }
-        }
-
     }
 
 
@@ -64,6 +31,8 @@ public class BField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 force_on_i = Vector3.zero;
+        Vector3 torque_on_i = Vector3.zero;
         bool change = false; //checks for any change to UI or magnets
         if (magnets.Count ==0)
         {
@@ -86,6 +55,19 @@ public class BField : MonoBehaviour
                 magnets[i].new_rot();
                 magnets[i].update_dipole();
             }
+            // Calculating force and torque exerted on all magnets
+            force_on_i = Vector3.zero;
+            torque_on_i = Vector3.zero;
+            for (int j = 0; j < magnets.Count; j++)
+            {
+                if (i != j)
+                    force_on_i += Calculate_force_vector(magnets[i], magnets[j]);
+            }
+            torque_on_i = Calculate_magnetic_torque(magnets[i], calculate_b_field_except_self(magnets[i].magnet_position, i));
+
+            // ith magnet experiences torque and force.
+            magnets[i].influence_force(force_on_i); 
+            magnets[i].influence_torque(torque_on_i);
         }
         if (change) //updates bfield and arrows if there has been a change
         {
@@ -101,11 +83,6 @@ public class BField : MonoBehaviour
                 bool active = false;
                 for (int j = 0; j < magnets.Count; j++)
                 {
-                    magnets[j] = radius(magnets[j],arrow_gap,20);//updating the radius of influence
-                    if (magnets[j].max_B_field_value>max_b){
-                        max_b = magnets[j].max_B_field_value;//finding the maximum B field value amoung all magnets
-                    }
-
                     float distance = Vector3.Distance(magnets[j].magnet_position, arrow_position);
                     if ((distance < magnets[j].radius_of_influence) && (distance > min_radius_of_influence))//check whther the arrow is within the radius of influence
                     {
@@ -130,25 +107,6 @@ public class BField : MonoBehaviour
                 {
                     arrows[i].SetActive(false); //Disable arrow rendering and interactability
                 }
-            }
-            // Calculating force and torque exerted on all magnets
-            Vector3 force_on_i = Vector3.zero;
-            Vector3 torque_on_i = Vector3.zero;
-            for (int i = 0; i < magnets.Count; i++)
-            {
-
-                force_on_i = Vector3.zero;
-                torque_on_i = Vector3.zero;
-                for (int j = 0; j < magnets.Count; j++)
-                {
-                    if (i != j)
-                        force_on_i += Calculate_force_vector(magnets[i], magnets[j]);
-                }
-                torque_on_i = Calculate_magnetic_torque(magnets[i], calculate_b_field_except_self(magnets[i].magnet_position, i));
-
-                // ith magnet experiences torque and force.
-                magnets[i].influence_force(force_on_i); 
-                magnets[i].influence_torque(torque_on_i);
             }
         }
     }

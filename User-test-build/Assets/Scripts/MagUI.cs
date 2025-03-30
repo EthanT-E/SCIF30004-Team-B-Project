@@ -24,6 +24,7 @@ public class MagUI : MonoBehaviour
         magsliderText.text = magslider.value.ToString();
         for(int i = 0; i < bscript.magnets.Count; i++)
         {
+            bscript.magnets[i].UI_value_change = false;
             if (bscript.magnets[i].Magnet.tag=="UI") //if magnet tag is UI
             {
                 if (auxslider.value!=bscript.magnets[i].auxilary_field.y) //if the auxillary field value on the slider is not equal to the magnet's value
@@ -41,8 +42,9 @@ public class MagUI : MonoBehaviour
     }
     public void delete_magnet() //calls function when the delete button is pressed
     {
-    for(int i = 0; i < bscript.magnets.Count; i++)
+        for(int i = 0; i < bscript.magnets.Count; i++)
         {
+            bscript.magnets[i].UI_value_change = false;
             if (bscript.magnets[i].Magnet.tag=="UI")
             {
                 Destroy(bscript.magnets[i].Magnet); //deletes magnet
