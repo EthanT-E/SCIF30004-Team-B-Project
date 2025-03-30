@@ -25,7 +25,7 @@ An interactive VR teaching tool made for A-level or equivalent physics students 
 -	Trigger-Interact/Grab magnet
 -	Primary button-Select magnet to edit
 -	Secondary button-Toggle scanner
--	
+
  ![Menu](https://github.com/user-attachments/assets/d2b198e1-bfbf-4355-b857-db2abe77e4e0)
 ### Generate Magnets
 1)	On the whiteboard select the Generate option.
