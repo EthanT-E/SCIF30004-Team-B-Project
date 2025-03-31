@@ -93,7 +93,8 @@ namespace Assets.Scripts
         */
         public void influence_torque(Vector3 torque)
         {
-            Magnet.GetComponent<Rigidbody>().AddTorque(torque.normalized * Mathf.Clamp(torque.magnitude, 0.0f, 1E5f), ForceMode.Acceleration);
+            Magnet.GetComponent<Rigidbody>().AddTorque(torque.normalized * Mathf.Clamp(torque.magnitude, 0.0f, 1E5f), ForceMode.Force);
+            Debug.Log(torque.x + "," + torque.y + "," +  torque.z);
         }
 
         public static void Generate_magnet(GameObject prefab, List<MagnetClass> Magnet_list, Vector3 start_pos, Vector3 iAux, float iSus = 1)

@@ -128,7 +128,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 250
   m_Drag: 50
-  m_AngularDrag: 75
+  m_AngularDrag: 0.255
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -367,8 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Magnet: {fileID: 0}
-  MagnetPosition: {x: 0, y: 0, z: 0}
-  MagnetRotation: {x: 0, y: 0, z: 0, w: 0}
+  magnet_position: {x: 0, y: 0, z: 0}
+  magnet_rotation: {x: 0, y: 0, z: 0, w: 0}
   magnetic_susceptibility: 0
   auxilary_field: {x: 0, y: 0, z: 0}
   dipole_moment: {x: 0, y: 0, z: 0}
@@ -376,4 +376,4 @@ MonoBehaviour:
   holding: 0
   max_B_field: {x: 0, y: 0, z: 0}
   max_B_field_value: 0
-  Radius_of_influence: 0
+  radius_of_influence: 0
